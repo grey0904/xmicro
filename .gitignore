@@ -1,0 +1,17 @@
+go.sum
+
+.DS_Store
+
+*/.vscode
+*/.idea
+
+*.exe
+
+demo
+
+.idea/
+
+.vscode/
+
+cache_nacos/
+
