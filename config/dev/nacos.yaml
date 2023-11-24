@@ -1,0 +1,7 @@
+nacos:
+  endpoints: ["39.109.69.146:8848"]
+  username: nacos
+  password: nacos
+  timeoutMs: 5000
+  namespaceId: 0f9a9129-7fcb-40f4-9138-5d3720c5bd4b
+  cacheDir: cache_nacos/

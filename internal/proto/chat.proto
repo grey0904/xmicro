@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package="./chat";
+
+// 定义 message
+message ChatMessage {
+  string body = 1;
+}
+
+// 定义 service
+service ChatService {
+  rpc SayHello(ChatMessage ) returns (ChatMessage ) {}
+}
+
+
+// protoc --proto_path=. --go_out=. --go-grpc_out=. ./*.proto
