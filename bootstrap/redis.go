@@ -2,7 +2,6 @@ package bootstrap
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
 	"github.com/redis/go-redis/v9"
@@ -47,12 +46,7 @@ func InitRedis() error {
 
 	err = yaml.Unmarshal([]byte(content), &r)
 	if err != nil {
-		fmt.Println(err)
-	}
-
-	err = json.Unmarshal([]byte(content), &r)
-	if err != nil {
-		log.Logger.Error("Redis 初始化错误:", err)
+		log.Logger.Error("Redis yaml.Unmarshal err:", err)
 		return err
 	}
 

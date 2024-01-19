@@ -19,7 +19,7 @@ func main() {
 	if err != nil {
 		return
 	}
-	//
+
 	//err = bootstrap.InitMysql()
 	//if err != nil {
 	//	return

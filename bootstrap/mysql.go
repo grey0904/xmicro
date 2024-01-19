@@ -11,6 +11,15 @@ func CovertToTpRedisVal(val []byte) string {
 	return s
 }
 
+type Mysql struct {
+	Host     string `yaml:"host"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
+	Port     int    `yaml:"port"`
+	Db       string `yaml:"db"`
+	Charset  string `yaml:"charset"`
+}
+
 //func InitMysql() error {
 //	dbinfo := config.Conf.Mysql
 //	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=True&loc=Local",
