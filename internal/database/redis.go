@@ -1,4 +1,4 @@
-package bootstrap
+package database
 
 import (
 	"context"
@@ -57,6 +57,7 @@ func InitRedis() error {
 		//PoolSize:     15,
 		//MinIdleConns: 10, //在启动阶段创建指定数量的Idle连接，并长期维持idle状态的连接数不少于指定数量；。
 	})
+
 	err = rdb.Ping(ctx).Err()
 	if err != nil {
 		log.Logger.Error("Redis 初始化错误:", err)

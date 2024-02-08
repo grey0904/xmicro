@@ -1,9 +1,10 @@
 package main
 
 import (
-	"xmicro/bootstrap"
 	"xmicro/internal/config"
+	"xmicro/internal/database"
 	"xmicro/internal/log"
+	"xmicro/internal/router"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 		return
 	}
 
-	err := bootstrap.InitRedis()
+	err := database.InitRedis()
 	if err != nil {
 		return
 	}
@@ -25,5 +26,5 @@ func main() {
 	//	return
 	//}
 
-	//bootstrap.RunServer()
+	router.RunServer()
 }
