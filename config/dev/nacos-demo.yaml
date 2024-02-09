@@ -1,5 +1,5 @@
 nacos:
-  endpoints: ["39.109.69.146:8848"]
+  endpoints: ["127.0.0.1:8848"]
   username: nacos
   password: nacos
   timeoutMs: 5000

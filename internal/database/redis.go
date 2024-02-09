@@ -34,7 +34,7 @@ type Redis struct {
 }
 
 func InitRedis() error {
-	content, err := app.App.NacosClient.GetConfig(vo.ConfigParam{
+	content, err := app.NacosClient.GetConfig(vo.ConfigParam{
 		DataId: "grey_redis.yaml",
 	})
 	if err != nil {
@@ -64,6 +64,6 @@ func InitRedis() error {
 		return err
 	}
 
-	app.App.Redis = rdb
+	app.Redis = rdb
 	return nil
 }

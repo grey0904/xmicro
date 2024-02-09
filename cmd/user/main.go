@@ -1,10 +1,10 @@
 package main
 
 import (
+	"xmicro/internal/app/user/router"
 	"xmicro/internal/config"
 	"xmicro/internal/database"
 	"xmicro/internal/log"
-	"xmicro/internal/router"
 )
 
 func main() {

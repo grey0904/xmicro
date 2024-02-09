@@ -57,7 +57,7 @@ func NewClient(c AppConfig) error {
 		fmt.Println(err.Error())
 	}
 
-	app.App.NacosClient = client
+	app.NacosClient = client
 
 	return nil
 }
