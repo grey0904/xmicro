@@ -9,7 +9,7 @@
 
 ### DID
 * 自定义返回体结构 ✅
-* zap日志 & lumberjack 记录日志
+* zap日志 & lumberjack 记录日志 ✅
 
 ### TODO
 * etcd 配置

@@ -1,21 +1,21 @@
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
 	"flag"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-	"time"
-	"xmicro/internal/websocket"
+	"xmicro/internal/ws"
 )
 
 var addr = flag.String("addr", ":8080", "http service address")
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL)
-	if r.URL.Path != "/" {
-		http.Error(w, "Not found", http.StatusNotFound)
-		return
-	}
 	if r.Method != http.MethodGet {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
@@ -25,17 +25,14 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	flag.Parse()
-	hub := websocket.NewHub()
-	go hub.Run()
-	http.HandleFunc("/", serveHome)
-	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		websocket.ServeWs(hub, w, r)
+	r := mux.NewRouter()
+	r.HandleFunc("/{room}", serveHome)
+	r.HandleFunc("/ws/{room}", func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		roomId := vars["room"]
+		ws.Start(roomId, w, r)
 	})
-	server := &http.Server{
-		Addr:              *addr,
-		ReadHeaderTimeout: 3 * time.Second,
-	}
-	err := server.ListenAndServe()
+	err := http.ListenAndServe(*addr, r)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
