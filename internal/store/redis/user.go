@@ -10,5 +10,5 @@ import (
 
 func SetRedisUserToken(ctx context.Context, userId string, token string) error {
 	key := fmt.Sprintf(constant.UserTokenKey, userId)
-	return app.Redis.Set(ctx, key, token, time.Hour*24).Err()
+	return app.Rd.Set(ctx, key, token, time.Hour*24).Err()
 }

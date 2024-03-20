@@ -1,30 +1,20 @@
 package main
 
 import (
+	"xmicro/internal/app"
 	"xmicro/internal/app/user/router"
-	"xmicro/internal/config"
 	"xmicro/internal/database"
 	"xmicro/internal/log"
+	"xmicro/internal/nacos"
 )
 
 func main() {
-
+	app.LoadConfig()
+	nacos.CreateConfigClient()
+	app.InitConfig()
+	database.InitRedis()
+	database.InitMysql()
 	log.InitLogger()
-
-	if err := config.LoadConfig(); err != nil {
-		log.Logger.Error("Load configs json error:", err)
-		return
-	}
-
-	err := database.InitRedis()
-	if err != nil {
-		return
-	}
-
-	//err = bootstrap.InitMysql()
-	//if err != nil {
-	//	return
-	//}
 
 	router.RunServer()
 }

@@ -3,11 +3,9 @@ package database
 import (
 	"context"
 	"fmt"
-	"github.com/nacos-group/nacos-sdk-go/v2/vo"
 	"github.com/redis/go-redis/v9"
-	"gopkg.in/yaml.v3"
+	"log"
 	"xmicro/internal/app"
-	"xmicro/internal/log"
 )
 
 var ctx = context.Background()
@@ -25,45 +23,18 @@ var ctx = context.Background()
 //	return rdb
 //}
 
-type Redis struct {
-	Host     string `json:"user" yaml:"host"`
-	Password string `json:"password" yaml:"password"`
-	Port     int    `json:"port" yaml:"port"`
-	Timeout  int    `json:"timeout" yaml:"timeout"`
-	Select   int    `json:"select" yaml:"select"`
-}
-
-func InitRedis() error {
-	content, err := app.NacosClient.GetConfig(vo.ConfigParam{
-		DataId: "grey_redis.yaml",
-	})
-	if err != nil {
-		log.Logger.Error("nacos GetConfig 错误:", err)
-		return err
-	}
-
-	var r Redis
-
-	err = yaml.Unmarshal([]byte(content), &r)
-	if err != nil {
-		log.Logger.Error("Redis yaml.Unmarshal err:", err)
-		return err
-	}
-
+func InitRedis() {
+	c := app.Config.Redis
 	rdb := redis.NewClient(&redis.Options{
-		Addr:     fmt.Sprintf("%s:%d", r.Host, r.Port),
-		Password: r.Password, // no password set
-		DB:       r.Select,   // use default DB
+		Addr:     fmt.Sprintf("%s:%d", c.Host, c.Port),
+		Password: c.Password, // no password set
+		DB:       c.Select,   // use default DB
 		//PoolSize:     15,
 		//MinIdleConns: 10, //在启动阶段创建指定数量的Idle连接，并长期维持idle状态的连接数不少于指定数量；。
 	})
-
-	err = rdb.Ping(ctx).Err()
+	err := rdb.Ping(ctx).Err()
 	if err != nil {
-		log.Logger.Error("Redis 初始化错误:", err)
-		return err
+		log.Fatalf("initMysqlConfig yaml.Unmarshal err: %v", err)
 	}
-
-	app.Redis = rdb
-	return nil
+	app.Rd = rdb
 }
