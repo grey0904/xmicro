@@ -4,9 +4,31 @@ import (
 	"fmt"
 	"github.com/nacos-group/nacos-sdk-go/v2/clients"
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
+	"net"
 )
 
+func getLocalIP() (string, error) {
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		return "", err
+	}
+	for _, address := range addrs {
+		// Check the address type and if it is not a loopback, display it.
+		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				return ipnet.IP.String(), nil
+			}
+		}
+	}
+	return "", fmt.Errorf("cannot find local IP address")
+}
+
 func RegistryToNacos() error {
+	localIP, err := getLocalIP()
+	if err != nil {
+		return fmt.Errorf("failed to get local IP: %v", err)
+	}
+
 	clientConfig := getNacosClientConfig()
 	serverConfigs := getNacosServerConfigs()
 
@@ -20,8 +42,8 @@ func RegistryToNacos() error {
 
 	serviceName := "chat" // Set your service name here
 	instance := vo.RegisterInstanceParam{
-		Ip:          "127.0.0.1", // Set your server IP here
-		Port:        9971,        // Set your server port here
+		Ip:          localIP, // Set your server IP here
+		Port:        9998,    // Set your server port here
 		ServiceName: serviceName,
 		Weight:      10,
 		Enable:      true,
@@ -40,6 +62,11 @@ func RegistryToNacos() error {
 }
 
 func DeregisterFromNacos() error {
+	localIP, err := getLocalIP()
+	if err != nil {
+		return fmt.Errorf("failed to get local IP: %v", err)
+	}
+
 	clientConfig := getNacosClientConfig()
 	serverConfigs := getNacosServerConfigs()
 
@@ -53,8 +80,8 @@ func DeregisterFromNacos() error {
 
 	serviceName := "chat"
 	instance := vo.DeregisterInstanceParam{
-		Ip:          "127.0.0.1",
-		Port:        9971,
+		Ip:          localIP,
+		Port:        9998,
 		ServiceName: serviceName,
 	}
 	success, err := client.DeregisterInstance(instance)

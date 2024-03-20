@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"xmicro/internal/nacos"
-	pb "xmicro/internal/pb"
+	"xmicro/internal/pb/im"
 )
 
 func main() {
@@ -18,7 +18,7 @@ func main() {
 	}
 
 	serviceInfo, err := client.GetService(vo.GetServiceParam{
-		ServiceName: "chat",
+		ServiceName: "grpc:im",
 	})
 	if err != nil {
 		log.Fatalf("Failed to get service info from Nacos: %v", err)
@@ -38,10 +38,10 @@ func main() {
 		defer conn.Close()
 
 		// 创建 gRPC 客户端
-		c := pb.NewImServiceClient(conn)
+		c := im.NewImServiceClient(conn)
 
 		// 调用 GetChannelsData 方法
-		resp, err := c.GetChannelsData(context.Background(), &pb.ChannelsDataRequest{ChannelIds: []string{"channel1", "channel2"}})
+		resp, err := c.GetChannelsData(context.Background(), &im.ChannelsDataRequest{ChannelIds: []string{"channel1", "channel2"}})
 		if err != nil {
 			log.Fatalf("Error calling GetChannelsData: %v", err)
 		}

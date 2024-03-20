@@ -9,15 +9,15 @@ import (
 	"os/signal"
 	"syscall"
 	"xmicro/internal/nacos"
-	pb "xmicro/internal/pb"
+	"xmicro/internal/pb/im"
 )
 
 type imServer struct {
-	pb.UnimplementedImServiceServer
+	im.UnimplementedImServiceServer
 }
 
-func (s *imServer) GetChannelsData(ctx context.Context, in *pb.ChannelsDataRequest) (*pb.ChannelsDataResponse, error) {
-	return &pb.ChannelsDataResponse{
+func (s *imServer) GetChannelsData(ctx context.Context, in *im.ChannelsDataRequest) (*im.ChannelsDataResponse, error) {
+	return &im.ChannelsDataResponse{
 		UserCount:    1,
 		ChatRoomLink: "www.123.com",
 	}, nil
@@ -29,32 +29,30 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to register gRPC service to Nacos: %v", err)
 	}
-	defer nacos.DeregisterFromNacos() // Defer deregistration
+	defer func() {
+		if err := nacos.DeregisterFromNacos(); err != nil {
+			log.Printf("Failed to deregister from Nacos: %v", err)
+		}
+	}()
 
-	// Create a listener on TCP port
 	lis, err := net.Listen("tcp", ":9971")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	// Create a gRPC server object
 	s := grpc.NewServer()
 
-	// Register the server with the generated protobuf code
-	pb.RegisterImServiceServer(s, &imServer{})
+	im.RegisterImServiceServer(s, &imServer{})
 
-	// Prepare to catch system signals for graceful shutdown
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 
-	// Serve in a goroutine so that it's non-blocking
 	go func() {
 		if err := s.Serve(lis); err != nil {
 			log.Fatalf("failed to serve: %v", err)
 		}
 	}()
 
-	// Block until a signal is received
 	sig := <-sigChan
 	log.Printf("Received signal: %v, initiating graceful shutdown", sig)
 	s.GracefulStop() // Gracefully stop the server
