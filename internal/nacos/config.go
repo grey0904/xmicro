@@ -9,7 +9,7 @@ import (
 	"xmicro/internal/app"
 )
 
-func CreateConfigClient() {
+func NewConfigClient() {
 	var (
 		sc = make([]constant.ServerConfig, 0)
 		nc = app.Config.Nacos
