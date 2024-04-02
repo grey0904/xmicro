@@ -10,6 +10,8 @@
 ### DID
 * 自定义返回体结构 ✅
 * zap日志 & lumberjack 记录日志 ✅
+* nacos 配置中心 ✅
+* nacos 服务注册与发现 ✅
 
 ### TODO
 * etcd 配置
