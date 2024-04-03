@@ -2,7 +2,7 @@ package main
 
 import (
 	"xmicro/internal/app"
-	"xmicro/internal/app/user/router"
+	"xmicro/internal/app/order/router"
 	"xmicro/internal/database"
 	"xmicro/internal/log"
 	"xmicro/internal/nacos"
