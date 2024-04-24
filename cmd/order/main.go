@@ -1,14 +1,17 @@
 package main
 
 import (
+	"time"
 	"xmicro/internal/app"
-	"xmicro/internal/app/order/router"
 	"xmicro/internal/database"
 	"xmicro/internal/log"
 	"xmicro/internal/nacos"
+	"xmicro/internal/rpc"
+	"xmicro/internal/services/order/router"
 )
 
 func main() {
+
 	// 加载配置
 	app.LoadConfig()        // 用viper将config/dev/nacos-local.yaml文件的数据解析到 AppConfig 结构体
 	nacos.NewConfigClient() // 用 AppConfig 中的Nacos配置信息创建“配置中心客户端”
@@ -19,6 +22,18 @@ func main() {
 	database.InitMysql()
 	log.InitLogger()
 
+	// 注册服务
+	nacos.RegistryToNacos("order")
+	rpc.OrderRpcRegister()
+
+	// 发现服务
+
 	// 启动本地服务
 	router.RunServer()
+
+	// 执行取消注册操作
+	nacos.DeregisterFromNacos("order")
+
+	// 等待一段时间确保异步处理完成
+	time.Sleep(2 * time.Second)
 }

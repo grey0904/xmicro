@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+package pb;
+
+service OrderService {
+  rpc GetOrderByUserId(GetOrderByUserIdRequest) returns (GetOrderByUserIdResponse);
+}
+
+message GetOrderByUserIdRequest {
+  int64 user_id = 1;
+}
+
+message GetOrderByUserIdResponse {
+  string total_amount = 1;       // 商户ID
+  string status = 2;             // 禁言原因
+  string order_date = 3;         // 禁言原因
+}

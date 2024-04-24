@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/gin-gonic/gin"
-	"xmicro/internal/app/order/dto"
+	"xmicro/internal/services/order/dto"
 )
 
 func OrderList(c *gin.Context, req dto.OrderListReq) (string, error) {

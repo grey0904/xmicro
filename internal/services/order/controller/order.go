@@ -3,9 +3,9 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	"xmicro/internal/app/order/dto"
-	"xmicro/internal/app/order/service"
 	"xmicro/internal/constant"
+	"xmicro/internal/services/order/dto"
+	"xmicro/internal/services/order/service"
 	"xmicro/internal/x"
 )
 

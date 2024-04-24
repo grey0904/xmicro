@@ -4,32 +4,21 @@ import (
 	"fmt"
 	"github.com/nacos-group/nacos-sdk-go/v2/clients/naming_client"
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
-	"net"
 	"xmicro/internal/log"
+	"xmicro/internal/utils/u_ip"
 )
 
-var Client naming_client.INamingClient
-var localIP string
+var (
+	Client  naming_client.INamingClient
+	localIP string
+)
 
-func getLocalIP() (string, error) {
-	addrs, err := net.InterfaceAddrs()
-	if err != nil {
-		return "", err
-	}
-	for _, address := range addrs {
-		// Check the address type and if it is not a loopback, display it.
-		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
-			if ipnet.IP.To4() != nil {
-				return ipnet.IP.String(), nil
-			}
-		}
-	}
-	return "", fmt.Errorf("cannot find local IP address")
-}
+func RegistryToNacos(svcName string) {
+	var (
+		err error
+	)
 
-func RegistryToNacos() {
-	var err error
-	localIP, err = getLocalIP()
+	localIP, err = u_ip.GetLocalIP()
 	if err != nil {
 		log.Logger.Fatalf("failed to get local IP: %v", err)
 	}
@@ -40,10 +29,10 @@ func RegistryToNacos() {
 	}
 
 	// TODO 改为查询nacos中的配置
-	serviceName := "grpc:user" // Set your service name here
+	serviceName := "grpc:" + svcName // Set your service name here
 	instance := vo.RegisterInstanceParam{
 		Ip:          localIP, // Set your server IP here
-		Port:        9998,    // Set your server port here
+		Port:        8080,    // Set your server port here
 		ServiceName: serviceName,
 		Weight:      10,
 		Enable:      true,
@@ -60,11 +49,11 @@ func RegistryToNacos() {
 	fmt.Println("Registered gRPC service to Nacos successfully")
 }
 
-func DeregisterFromNacos() {
+func DeregisterFromNacos(svcName string) {
 	instance := vo.DeregisterInstanceParam{
 		Ip:          localIP,
-		Port:        9998,
-		ServiceName: "grpc:user",
+		Port:        8081,
+		ServiceName: "grpc:" + svcName,
 	}
 	success, err := Client.DeregisterInstance(instance)
 	if err != nil {

@@ -9,19 +9,21 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"xmicro/internal/app/user/controller"
 	"xmicro/internal/nacos"
+	"xmicro/internal/services/user/controller"
 )
 
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
+	api := r.Group("user/")
 	userCtl := new(controller.UserController)
 
-	r.POST("/login", userCtl.Login)
+	api.POST("/login", userCtl.Login)
+	api.POST("/orders", userCtl.Orders)
 
 	// 创建一个GET路由，用于获取服务实例信息
-	r.GET("/instance", func(c *gin.Context) {
+	api.GET("/instance", func(c *gin.Context) {
 		instances, err := nacos.Client.SelectAllInstances(vo.SelectAllInstancesParam{
 			ServiceName: "grpc:user",
 		})

@@ -1,29 +1,14 @@
 package main
 
 import (
-	"context"
-	"google.golang.org/grpc"
 	"time"
 	"xmicro/internal/app"
-	"xmicro/internal/app/user/router"
 	"xmicro/internal/database"
 	"xmicro/internal/log"
 	"xmicro/internal/nacos"
-	"xmicro/internal/pb/user"
+	"xmicro/internal/rpc"
+	"xmicro/internal/services/user/router"
 )
-
-type userServer struct {
-	user.UnimplementedUserServiceServer
-}
-
-func (s *userServer) GetUserInfo(ctx context.Context, in *user.GetUserInfoRequest) (*user.GetUserInfoResponse, error) {
-	return &user.GetUserInfoResponse{
-		UserId:   "1",
-		UserName: "ben",
-		Email:    "benben@gmail.com",
-		Age:      "22",
-	}, nil
-}
 
 func main() {
 	// 加载配置
@@ -36,15 +21,15 @@ func main() {
 	database.InitMysql()
 	log.InitLogger()
 
-	// 注册服务
-	nacos.RegistryToNacos()
-	user.RegisterUserServiceServer(grpc.NewServer(), &userServer{})
+	nacos.RegistryToNacos("user")
+	rpc.UserRpcRegister()
+	nacos.DiscoveryFromNacos("order")
 
 	// goroutine 启动本地服务
 	router.RunServer()
 
 	// 执行取消注册操作
-	nacos.DeregisterFromNacos()
+	nacos.DeregisterFromNacos("user")
 
 	// 等待一段时间确保异步处理完成
 	time.Sleep(2 * time.Second)

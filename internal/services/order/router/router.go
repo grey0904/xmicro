@@ -7,7 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"xmicro/internal/app/order/controller"
+	"xmicro/internal/services/order/controller"
 )
 
 func SetupRouter() *gin.Engine {

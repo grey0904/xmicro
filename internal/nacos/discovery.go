@@ -3,54 +3,83 @@ package nacos
 import (
 	"errors"
 	"fmt"
-	"github.com/nacos-group/nacos-sdk-go/v2/clients"
-	"github.com/nacos-group/nacos-sdk-go/v2/clients/naming_client"
-	"github.com/nacos-group/nacos-sdk-go/v2/common/constant"
-	"strconv"
-	"strings"
-	"xmicro/internal/app"
+	"github.com/nacos-group/nacos-sdk-go/v2/model"
+	"github.com/nacos-group/nacos-sdk-go/v2/vo"
+	"google.golang.org/grpc"
+	"log"
+	"sync"
+	"sync/atomic"
+	"xmicro/internal/proto/pb"
 )
 
-func NewNamingClient() (naming_client.INamingClient, error) {
-	var (
-		sc = make([]constant.ServerConfig, 0)
-		nc = app.Config.Nacos
-	)
+var (
+	OrderServiceClients []pb.OrderServiceClient
+	nextClientIndex     int32
+	clientMu            sync.Mutex
+)
 
-	for _, value := range nc.Endpoints {
-		vs := strings.Split(value, ":")
-
-		if len(vs) < 2 {
-			return nil, errors.New("endpoints configuration error")
-		}
-
-		port, err := strconv.ParseUint(vs[1], 10, 64)
-		if err != nil {
-			return nil, errors.New("endpoints configuration error")
-		}
-
-		sc = append(sc, constant.ServerConfig{
-			IpAddr: vs[0],
-			Port:   port,
-		})
+func DiscoveryFromNacos(svcName string) {
+	svcName = "grpc:" + svcName
+	client, err := NewNamingClient()
+	if err != nil {
+		panic(err)
 	}
 
-	cc := constant.ClientConfig{
-		NamespaceId:         nc.NamespaceId,
-		TimeoutMs:           nc.TimeoutMs,
-		NotLoadCacheAtStart: true,
-		CacheDir:            nc.CacheDir,
-		Username:            nc.Username,
-		Password:            nc.Password,
-	}
+	err = client.Subscribe(&vo.SubscribeParam{
+		ServiceName: svcName,
+		SubscribeCallback: func(services []model.Instance, err error) {
+			if err != nil {
+				panic(err)
+			}
 
-	client, err := clients.CreateNamingClient(map[string]interface{}{
-		"serverConfigs": sc,
-		"clientConfig":  cc,
+			updateGrpcClients(services)
+		},
 	})
 	if err != nil {
-		return nil, fmt.Errorf("failed to create Nacos client: %w", err)
+		panic(err)
 	}
 
-	return client, nil
+	services, err := client.SelectAllInstances(vo.SelectAllInstancesParam{
+		ServiceName: svcName,
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	updateGrpcClients(services)
+}
+
+func updateGrpcClients(services []model.Instance) {
+	clientMu.Lock()
+	defer clientMu.Unlock()
+
+	OrderServiceClients = nil
+	for _, service := range services {
+		log.Printf("ServiceName: %s, IP: %s, Port: %d, Metadata: %s\n",
+			service.ServiceName, service.Ip, service.Port, service.Metadata)
+
+		//conn, err := grpc.Dial(fmt.Sprintf("%s:%d", "192.168.0.151", 9998), grpc.WithInsecure()) // 本地调试
+		conn, err := grpc.Dial(fmt.Sprintf("%s:%d", service.Ip, service.Port), grpc.WithInsecure())
+		if err != nil {
+			log.Printf("Failed to connect to gRPC service: %v", err)
+			continue
+		}
+		OrderServiceClients = append(OrderServiceClients, pb.NewOrderServiceClient(conn))
+	}
+
+	if len(OrderServiceClients) == 0 {
+		log.Printf("No available gRPC services")
+	}
+}
+
+func GetNextOrderClient() pb.OrderServiceClient {
+	clientMu.Lock()
+	defer clientMu.Unlock()
+
+	if len(OrderServiceClients) == 0 {
+		panic(errors.New("no available gRPC clients"))
+	}
+
+	index := atomic.AddInt32(&nextClientIndex, 1)
+	return OrderServiceClients[index%int32(len(OrderServiceClients))]
 }

@@ -1,9 +1,12 @@
 package service
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
-	dto "xmicro/internal/app/user/dto"
 	"xmicro/internal/constant"
+	"xmicro/internal/nacos"
+	"xmicro/internal/proto/pb"
+	"xmicro/internal/services/user/dto"
 	store_redis "xmicro/internal/store/redis"
 	"xmicro/internal/utils/u_jwt"
 	"xmicro/internal/x"
@@ -26,4 +29,20 @@ func UserLogin(c *gin.Context, req dto.LoginReq) (string, error) {
 	}
 
 	return token, nil
+}
+
+func UserOrders(c *gin.Context, req dto.UserOrdersReq) (string, error) {
+	var (
+		err     error
+		rpcReq  = &pb.GetOrderByUserIdRequest{}
+		rpcResp = &pb.GetOrderByUserIdResponse{}
+	)add
+	rpcReq.UserId = req.UserId
+	if rpcResp, err = nacos.GetNextOrderClient().GetOrderByUserId(c, rpcReq); err != nil {
+		return "", err
+	}
+
+	fmt.Println(rpcResp)
+
+	return "", nil
 }

@@ -3,9 +3,9 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	"xmicro/internal/app/user/dto"
-	"xmicro/internal/app/user/service"
 	"xmicro/internal/constant"
+	"xmicro/internal/services/user/dto"
+	"xmicro/internal/services/user/service"
 	"xmicro/internal/x"
 )
 
@@ -20,6 +20,23 @@ func (that *UserController) Login(c *gin.Context) {
 	}
 
 	token, err := service.UserLogin(c, req)
+	if err != nil {
+		x.HandleErr(c, x.ErrorModel(constant.ServerError))
+		return
+	}
+
+	x.Success(c, token)
+}
+
+func (that *UserController) Orders(c *gin.Context) {
+	req := dto.UserOrdersReq{}
+	err := c.ShouldBindBodyWith(&req, binding.JSON)
+	if err != nil {
+		x.HandleErr(c, x.ErrorModel(constant.ParamError))
+		return
+	}
+
+	token, err := service.UserOrders(c, req)
 	if err != nil {
 		x.HandleErr(c, x.ErrorModel(constant.ServerError))
 		return
