@@ -9,6 +9,6 @@ func UserRpcRegister() {
 	pb.RegisterUserServiceServer(grpc.NewServer(), &UserServer{})
 }
 
-func OrderRpcRegister() {
-	pb.RegisterUserServiceServer(grpc.NewServer(), &UserServer{})
+func OrderRpcRegister(server *grpc.Server) {
+	pb.RegisterOrderServiceServer(server, &OrderServer{})
 }

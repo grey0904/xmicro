@@ -6,7 +6,6 @@ import (
 	"xmicro/internal/database"
 	"xmicro/internal/log"
 	"xmicro/internal/nacos"
-	"xmicro/internal/rpc"
 	"xmicro/internal/services/user/router"
 )
 
@@ -21,15 +20,15 @@ func main() {
 	database.InitMysql()
 	log.InitLogger()
 
-	nacos.RegistryToNacos("user")
-	rpc.UserRpcRegister()
+	//nacos.RegistryToNacos("user")
+	//rpc.UserRpcRegister()
 	nacos.DiscoveryFromNacos("order")
 
 	// goroutine 启动本地服务
 	router.RunServer()
 
 	// 执行取消注册操作
-	nacos.DeregisterFromNacos("user")
+	//nacos.DeregisterFromNacos("user")
 
 	// 等待一段时间确保异步处理完成
 	time.Sleep(2 * time.Second)

@@ -36,7 +36,7 @@ func UserOrders(c *gin.Context, req dto.UserOrdersReq) (string, error) {
 		err     error
 		rpcReq  = &pb.GetOrderByUserIdRequest{}
 		rpcResp = &pb.GetOrderByUserIdResponse{}
-	)add
+	)
 	rpcReq.UserId = req.UserId
 	if rpcResp, err = nacos.GetNextOrderClient().GetOrderByUserId(c, rpcReq); err != nil {
 		return "", err

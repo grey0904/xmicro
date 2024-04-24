@@ -6,7 +6,6 @@ import (
 	"xmicro/internal/database"
 	"xmicro/internal/log"
 	"xmicro/internal/nacos"
-	"xmicro/internal/rpc"
 	"xmicro/internal/services/order/router"
 )
 
@@ -24,9 +23,6 @@ func main() {
 
 	// 注册服务
 	nacos.RegistryToNacos("order")
-	rpc.OrderRpcRegister()
-
-	// 发现服务
 
 	// 启动本地服务
 	router.RunServer()

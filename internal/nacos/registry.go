@@ -32,7 +32,7 @@ func RegistryToNacos(svcName string) {
 	serviceName := "grpc:" + svcName // Set your service name here
 	instance := vo.RegisterInstanceParam{
 		Ip:          localIP, // Set your server IP here
-		Port:        8080,    // Set your server port here
+		Port:        9997,    // Set your server port here
 		ServiceName: serviceName,
 		Weight:      10,
 		Enable:      true,
@@ -52,7 +52,7 @@ func RegistryToNacos(svcName string) {
 func DeregisterFromNacos(svcName string) {
 	instance := vo.DeregisterInstanceParam{
 		Ip:          localIP,
-		Port:        8081,
+		Port:        9997,
 		ServiceName: "grpc:" + svcName,
 	}
 	success, err := Client.DeregisterInstance(instance)
