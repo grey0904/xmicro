@@ -6,7 +6,7 @@ import (
 	"xmicro/internal/constant"
 	"xmicro/internal/nacos"
 	"xmicro/internal/proto/pb"
-	"xmicro/internal/services/user/dto"
+	"xmicro/internal/service/user/dto"
 	store_redis "xmicro/internal/store/redis"
 	"xmicro/internal/utils/u_jwt"
 	"xmicro/internal/x"

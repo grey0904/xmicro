@@ -10,7 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 	"xmicro/internal/rpc"
-	"xmicro/internal/services/order/controller"
+	"xmicro/internal/service/order/controller"
 )
 
 func SetupRouter() *gin.Engine {

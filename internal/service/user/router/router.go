@@ -10,7 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 	"xmicro/internal/nacos"
-	"xmicro/internal/services/user/controller"
+	"xmicro/internal/service/user/controller"
 )
 
 func SetupRouter() *gin.Engine {

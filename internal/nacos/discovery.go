@@ -68,7 +68,7 @@ func updateGrpcClients(services []model.Instance) {
 	}
 
 	if len(OrderServiceClients) == 0 {
-		log.Printf("No available gRPC services")
+		log.Printf("No available gRPC service")
 	}
 }
 

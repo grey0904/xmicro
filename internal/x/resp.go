@@ -29,13 +29,13 @@ func HandleErr(ctx *gin.Context, err error) {
 
 	var serviceError *ServiceErrorModel
 	if errors.As(err, &serviceError) {
-		//log.EF(ctx.Request.Context(), "手动抛出err: %+v", serviceError)
+		//logs.EF(ctx.Request.Context(), "手动抛出err: %+v", serviceError)
 		code = serviceError.Code
 		msg = constant.MessageMap[code]
 		resultData = nil
 	}
 
-	//log.EF(ctx.Request.Context(), "path = %s code = %d message = %s err = %+v", ctx.Request.URL, code, msg, err)
+	//logs.EF(ctx.Request.Context(), "path = %s code = %d message = %s err = %+v", ctx.Request.URL, code, msg, err)
 	resp(ctx, code, resultData, msg)
 }
 

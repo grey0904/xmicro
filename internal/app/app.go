@@ -1,77 +1,84 @@
 package app
 
 import (
-	"errors"
-	"flag"
-	"github.com/nacos-group/nacos-sdk-go/v2/clients/config_client"
-	"github.com/nacos-group/nacos-sdk-go/v2/vo"
-	"github.com/redis/go-redis/v9"
-	"github.com/spf13/viper"
-	"gopkg.in/yaml.v3"
-	"gorm.io/gorm"
-	"log"
-	"xmicro/internal/config"
+	"context"
+	"google.golang.org/grpc"
+	"net"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+	"xmicro/internal/common/config"
+	"xmicro/internal/common/discovery"
+	"xmicro/internal/common/logs"
+	"xmicro/internal/core/repo"
+	"xmicro/internal/proto/pb"
 )
 
-var (
-	Rd     *redis.Client
-	Db     *gorm.DB
-	Nc     config_client.IConfigClient
-	Config *config.AppConfig
-)
+//var (
+//	Rd     *redis.Client
+//	Db     *gorm.DB
+//	Config *config.AppConfig
+//)
 
-func InitConfig() {
-	InitMysqlConfig()
-	InitRedisConfig()
-}
+// Run 启动程序 启动grpc服务 启用http服务  启用日志 启用数据库
+func Run(ctx context.Context) error {
 
-func LoadConfig() {
-	configFile := flag.String("config", "", "Path to config file")
-	flag.Parse()
+	logs.Init()
+	manager := repo.New()
 
-	if *configFile == "" {
-		log.Fatalf("error:: %v", errors.New("123"))
+	//2. etcd注册中心 grpc服务注册到etcd中 客户端访问的时候 通过etcd获取grpc的地址
+	register := discovery.NewRegister()
+	//启动grpc服务端
+	server := grpc.NewServer()
+	//注册 grpc service 需要数据库 mongo redis
+
+	go func() {
+		lis, err := net.Listen("tcp", config.Conf.Grpc.Addr)
+		if err != nil {
+			logs.Fatal("user grpc server listen err:%v", err)
+		}
+		err = register.Register(config.Conf.Etcd)
+		if err != nil {
+			logs.Fatal("user grpc server register etcd err:%v", err)
+		}
+		pb.RegisterUserServiceServer(server, service.NewAccountService(manager))
+		//阻塞操作
+		err = server.Serve(lis)
+		if err != nil {
+			logs.Fatal("user grpc server run failed err:%v", err)
+		}
+	}()
+	stop := func() {
+		server.Stop()
+		register.Close()
+		manager.Close()
+		//other
+		time.Sleep(3 * time.Second)
+		logs.Info("stop app finish")
 	}
-
-	viper.SetConfigFile(*configFile)
-	viper.SetConfigType("yaml")
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		log.Fatalf("error:: %v", err)
-	}
-
-	err = viper.Unmarshal(&Config)
-	if err != nil {
-		log.Fatalf("error:: %v", err)
-	}
-}
-
-func InitMysqlConfig() {
-
-	content, err := Nc.GetConfig(vo.ConfigParam{
-		DataId: "mysql.yaml",
-	})
-	if err != nil {
-		log.Fatalf("initMysqlConfig NacosClient.GetConfig err: %v", err)
-	}
-
-	err = yaml.Unmarshal([]byte(content), &Config.Mysql)
-	if err != nil {
-		log.Fatalf("initMysqlConfig yaml.Unmarshal err: %v", err)
-	}
-}
-
-func InitRedisConfig() {
-	content, err := Nc.GetConfig(vo.ConfigParam{
-		DataId: "redis.yaml",
-	})
-	if err != nil {
-		log.Fatalf("initRedisConfig NacosClient.GetConfig err: %v", err)
-	}
-
-	err = yaml.Unmarshal([]byte(content), &Config.Redis)
-	if err != nil {
-		log.Fatalf("initRedisConfig yaml.Unmarshal err: %v", err)
+	//期望有一个优雅启停 遇到中断 退出 终止 挂断
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT, syscall.SIGHUP)
+	for {
+		select {
+		case <-ctx.Done():
+			stop()
+			//time out
+			return nil
+		case s := <-c:
+			switch s {
+			case syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT:
+				stop()
+				logs.Info("user app quit")
+				return nil
+			case syscall.SIGHUP:
+				stop()
+				logs.Info("hang up!! user app quit")
+				return nil
+			default:
+				return nil
+			}
+		}
 	}
 }

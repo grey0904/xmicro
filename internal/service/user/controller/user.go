@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"xmicro/internal/constant"
-	"xmicro/internal/services/user/dto"
-	"xmicro/internal/services/user/service"
+	"xmicro/internal/service/user/dto"
+	"xmicro/internal/service/user/service"
 	"xmicro/internal/x"
 )
 

@@ -5,6 +5,6 @@ nacos:
   timeoutMs: 5000
   namespaceId: 0f9a9129-7fcb-40f4-9138-5d3720c5bd4a
   cacheDir: cache_nacos/
-  logDir: /tmp/nacos/log
+  logDir: /tmp/nacos/logs
   logLevel: debug
   notLoadCacheAtStart: true
