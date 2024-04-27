@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"xmicro/internal/app/order"
+	"xmicro/internal/app"
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/metrics"
+	"xmicro/internal/nacos"
 )
 
 func main() {
@@ -23,9 +24,11 @@ func main() {
 	}()
 
 	//3.启动 http、grpc 服务端
-	err := order.RunV1(context.Background())
+	err := app.Run(context.Background())
 	if err != nil {
 		log.Println(err)
 		os.Exit(-1)
 	}
+
+	nacos.DiscoveryFromNacos("order")
 }
