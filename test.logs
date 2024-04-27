@@ -1,0 +1,1 @@
+2024-04-28T02:24:00.296+0800	FATAL	logs/zap.go:74	mongo ping err:server selection error: context deadline exceeded, current topology: { Type: Unknown, Servers: [{ Addr: 127.0.0.1:27018, Type: Unknown, Last error: dial tcp 127.0.0.1:27018: connect: connection refused }, ] }	{"app": "user"}

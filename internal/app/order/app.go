@@ -8,13 +8,13 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+	"xmicro/internal/app/order/pb"
 	"xmicro/internal/app/order/service"
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/discovery"
 	"xmicro/internal/common/logs"
 	"xmicro/internal/core/repo"
 	"xmicro/internal/nacos"
-	"xmicro/internal/proto/pb"
 )
 
 // RunV1 启动程序 启动grpc服务 启用http服务  启用日志 启用数据库

@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"google.golang.org/grpc"
-	"xmicro/internal/proto/pb"
+	"xmicro/internal/app/order/pb"
 )
 
 type OrderService struct {

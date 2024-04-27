@@ -1,7 +1,7 @@
 package service
 
 import (
-	"xmicro/internal/proto/pb"
+	"xmicro/internal/app/user/pb"
 )
 
 type UserService struct {

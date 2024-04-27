@@ -9,7 +9,7 @@ import (
 	"log"
 	"sync"
 	"sync/atomic"
-	"xmicro/internal/proto/pb"
+	"xmicro/internal/app/order/pb"
 )
 
 var (

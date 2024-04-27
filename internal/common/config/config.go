@@ -16,13 +16,14 @@ import (
 	"strings"
 )
 
-var NacosConf *NacosConfig
+var LocalConf *LocalConfig
 var Conf *Config
 var Nc config_client.IConfigClient
 
-// NacosConfig 本地的 nacos 配置
-type NacosConfig struct {
-	Nacos Nacos `yaml:"nacos"`
+// LocalConfig 本地的 nacos 配置
+type LocalConfig struct {
+	Nacos      Nacos  `yaml:"nacos"`
+	ConfigName string `yaml:"configName"`
 }
 
 type Nacos struct {
@@ -118,13 +119,13 @@ func InitConfig() {
 		panic(fmt.Errorf("path to config file err"))
 	}
 
-	NacosConf = new(NacosConfig)
+	LocalConf = new(LocalConfig)
 	v := viper.New()
 	v.SetConfigFile(*configFile)
 	v.WatchConfig()
 	v.OnConfigChange(func(in fsnotify.Event) {
 		log.Println("配置文件被修改了")
-		if err := v.Unmarshal(&NacosConf); err != nil {
+		if err := v.Unmarshal(&LocalConf); err != nil {
 			panic(fmt.Errorf("Unmarshal change config data,err:%v \n", err))
 		}
 	})
@@ -133,21 +134,20 @@ func InitConfig() {
 		panic(fmt.Errorf("读取配置文件出错,err:%v \n", err))
 	}
 
-	if err := v.Unmarshal(&NacosConf); err != nil {
+	if err := v.Unmarshal(&LocalConf); err != nil {
 		panic(fmt.Errorf("Unmarshal config data,err:%v \n", err))
 	}
 
 	// 用 AppConfig 中的Nacos配置信息创建“配置中心客户端”
 	NewConfigClient()
-	// 从Nacos上获取Mysql、Redis等配置，并解析给对应的 AppConfig 里面的结构体
-	InitMysqlConfig()
-	InitRedisConfig()
+	// 从Nacos上获取配置，并解析给对应的 AppConfig 里面的结构体
+	InitNacosConfig()
 }
 
 func NewConfigClient() {
 	var (
 		sc = make([]constant.ServerConfig, 0)
-		nc = NacosConf.Nacos
+		nc = LocalConf.Nacos
 	)
 
 	cc := constant.ClientConfig{
@@ -189,30 +189,16 @@ func NewConfigClient() {
 	Nc = client
 }
 
-func InitMysqlConfig() {
+func InitNacosConfig() {
 	content, err := Nc.GetConfig(vo.ConfigParam{
-		DataId: "mysql.yaml",
+		DataId: LocalConf.ConfigName,
 	})
 	if err != nil {
 		log.Fatalf("initMysqlConfig NacosClient.GetConfig err: %v", err)
 	}
 
-	err = yaml.Unmarshal([]byte(content), &Conf.Database.MysqlConf)
+	err = yaml.Unmarshal([]byte(content), &Conf)
 	if err != nil {
 		log.Fatalf("initMysqlConfig yaml.Unmarshal err: %v", err)
-	}
-}
-
-func InitRedisConfig() {
-	content, err := Nc.GetConfig(vo.ConfigParam{
-		DataId: "redis.yaml",
-	})
-	if err != nil {
-		log.Fatalf("initRedisConfig NacosClient.GetConfig err: %v", err)
-	}
-
-	err = yaml.Unmarshal([]byte(content), &Conf.Database.RedisConf)
-	if err != nil {
-		log.Fatalf("initRedisConfig yaml.Unmarshal err: %v", err)
 	}
 }

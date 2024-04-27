@@ -8,13 +8,13 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/v2/common/constant"
 	"strconv"
 	"strings"
-	"xmicro/internal/app"
+	"xmicro/internal/common/config"
 )
 
 func NewNamingClient() (naming_client.INamingClient, error) {
 	var (
 		sc = make([]constant.ServerConfig, 0)
-		nc = app.Config.Nacos
+		nc = config.LocalConf.Nacos
 	)
 
 	for _, value := range nc.Endpoints {
