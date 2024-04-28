@@ -1,4 +1,4 @@
-package x
+package result2
 
 import (
 	"errors"

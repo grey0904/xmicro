@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"time"
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/logs"

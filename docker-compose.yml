@@ -31,7 +31,7 @@ services:
     privileged: true  # 设置容器的权限为root
     environment:
       MONGO_INITDB_ROOT_USERNAME: root  # 账号
-      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_ROOT_PASSWORD: root123456
   redis:
     image: redis:${REDIS_VERSION}
     container_name: redis

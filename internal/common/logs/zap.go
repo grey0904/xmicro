@@ -23,8 +23,8 @@ func Init() {
 		core := zapcore.NewCore(encoder, writeSyncer, config.Conf.ZapLog.Level)
 
 		opts := []zap.Option{zap.AddCaller()}
-		if config.Conf.AppName != "" {
-			opts = append(opts, zap.Fields(zap.String("app", config.Conf.AppName)))
+		if config.LocalConf.AppName != "" {
+			opts = append(opts, zap.Fields(zap.String("app", config.LocalConf.AppName)))
 		}
 
 		log := zap.New(core, opts...)

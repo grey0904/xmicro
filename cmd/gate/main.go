@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"xmicro/internal/app"
+	"xmicro/internal/app/gate"
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/metrics"
 	"xmicro/internal/nacos"
@@ -24,7 +24,7 @@ func main() {
 	}()
 
 	//3.启动 http、grpc 服务端
-	err := app.Run(context.Background())
+	err := gate.Run(context.Background())
 	if err != nil {
 		log.Println(err)
 		os.Exit(-1)

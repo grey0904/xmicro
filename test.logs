@@ -1,1 +1,14 @@
 2024-04-28T02:24:00.296+0800	FATAL	logs/zap.go:74	mongo ping err:server selection error: context deadline exceeded, current topology: { Type: Unknown, Servers: [{ Addr: 127.0.0.1:27018, Type: Unknown, Last error: dial tcp 127.0.0.1:27018: connect: connection refused }, ] }	{"app": "user"}
+2024-04-28T19:08:22.920+0800	FATAL	logs/zap.go:74	mongo ping err:server selection error: context deadline exceeded, current topology: { Type: Unknown, Servers: [{ Addr: 127.0.0.1:27018, Type: Unknown, Last error: dial tcp 127.0.0.1:27018: connect: connection refused }, ] }	{"app": "user"}
+2024-04-28T19:28:46.595+0800	FATAL	logs/zap.go:74	Error opening MySQL connection: sql: unknown driver "mysql" (forgotten import?)
+	{"app": "user"}
+2024-04-28T19:40:11.478+0800	FATAL	logs/zap.go:74	Error pinging MySQL server: Error 1049 (42000): Unknown database 'moon'
+	{"app": "user"}
+2024-04-28T19:43:00.201+0800	FATAL	logs/zap.go:74	Error pinging MySQL server: Error 1049 (42000): Unknown database 'moon'
+	{"app": "user"}
+2024-04-28T19:50:45.822+0800	FATAL	logs/zap.go:74	Successfully deregistered from Nacos	{"app": "user"}
+2024-04-28T20:27:13.204+0800	FATAL	logs/zap.go:74	Successfully deregistered from Nacos	{"app": "user"}
+2024-04-28T20:28:12.501+0800	FATAL	logs/zap.go:74	clients.RegisterInstance error: retry 3 times request failed!: request return error code 400	{"app": "user"}
+2024-04-28T20:29:32.983+0800	FATAL	logs/zap.go:74	clients.RegisterInstance error: retry 3 times request failed!: request return error code 400	{"app": "user"}
+2024-04-28T20:30:43.333+0800	FATAL	logs/zap.go:74	clients.RegisterInstance error: retry 3 times request failed!: request return error code 400	{"app": "user"}
+2024-04-28T20:32:05.936+0800	FATAL	logs/zap.go:74	clients.RegisterInstance error: retry 3 times request failed!: request return error code 400	{"app": "user"}

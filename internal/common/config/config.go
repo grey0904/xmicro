@@ -9,7 +9,6 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/v2/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
 	"github.com/spf13/viper"
-	"go.uber.org/zap/zapcore"
 	"gopkg.in/yaml.v3"
 	"log"
 	"strconv"
@@ -20,98 +19,14 @@ var LocalConf *LocalConfig
 var Conf *Config
 var Nc config_client.IConfigClient
 
-// LocalConfig 本地的 nacos 配置
-type LocalConfig struct {
-	Nacos      Nacos  `yaml:"nacos"`
-	ConfigName string `yaml:"configName"`
-}
-
-type Nacos struct {
-	Endpoints           []string `yaml:"endpoints"`
-	Username            string   `yaml:"username"`
-	Password            string   `yaml:"password"`
-	TimeoutMs           uint64   `yaml:"timeoutMs"`
-	NamespaceId         string   `yaml:"namespaceId"`
-	NotLoadCacheAtStart bool     `yaml:"otLoadCacheAtStart"`
-	CacheDir            string   `yaml:"cacheDir"`
-	LogDir              string   `yaml:"logDir"`
-	LogLevel            string   `yaml:"logLevel"`
-}
-
-// Config 服务相关配置，配置存放在
-type Config struct {
-	Database   Database   `yaml:"db"`
-	MetricPort int        `yaml:"metricPort"`
-	AppName    string     `yaml:"appName"`
-	ZapLog     ZapLogConf `yaml:"zapLog"`
-	Etcd       EtcdConf   `yaml:"etcd"`
-	Grpc       GrpcConf   `yaml:"grpc"`
-}
-
-type RegisterServer struct {
-	Addr    string `yaml:"addr"`
-	Name    string `yaml:"name"`
-	Version string `yaml:"version"`
-	Weight  int    `yaml:"weight"`
-	Ttl     int64  `yaml:"ttl"` //租约时长
-}
-
-// Database 数据库配置
-type Database struct {
-	MysqlConf MysqlConf `yaml:"mysql"`
-	RedisConf RedisConf `yaml:"redis"`
-	MongoConf MongoConf `yaml:"mongo"`
-}
-
-type MysqlConf struct {
-	Username     string `yaml:"username"`
-	Password     string `yaml:"password"`
-	Host         string `yaml:"host"`
-	Port         string `yaml:"port"`
-	Database     string `yaml:"database"`
-	MaxOpenConns int    `yaml:"maxOpenConns"`
-	MaxIdleConns int    `yaml:"maxIdleConns"`
-}
-
-type RedisConf struct {
-	Addr         string   `yaml:"addr"`
-	ClusterAddrs []string `yaml:"clusterAddrs"`
-	Password     string   `yaml:"password"`
-	PoolSize     int      `yaml:"poolSize"`
-	MinIdleConns int      `yaml:"minIdleConns"`
-	Host         string   `yaml:"host"`
-	Port         int      `yaml:"port"`
-	Timeout      int      `json:"timeout" yaml:"timeout"`
-	Select       int      `json:"select" yaml:"select"`
-}
-
-type MongoConf struct {
-	Url         string `yaml:"url"`
-	Db          string `yaml:"db"`
-	UserName    string `yaml:"userName"`
-	Password    string `yaml:"password"`
-	MinPoolSize int    `yaml:"minPoolSize"`
-	MaxPoolSize int    `yaml:"maxPoolSize"`
-}
-
-type ZapLogConf struct {
-	Level zapcore.Level `yaml:"level"`
-	File  string        `yaml:"file"`
-}
-
-type EtcdConf struct {
-	Addrs       []string       `yaml:"addrs"`
-	RWTimeout   int            `yaml:"rwTimeout"`
-	DialTimeout int            `yaml:"dialTimeout"`
-	Register    RegisterServer `yaml:"register"`
-}
-
-type GrpcConf struct {
-	Addr string `yaml:"addr"`
-}
+const (
+	MysqlConfigKey = "mysql.yaml"
+	RedisConfigKey = "redis.yaml"
+	MongoConfigKey = "mongo.yaml"
+)
 
 // InitConfig 加载配置
-func InitConfig() {
+func InitConfig(appName string) {
 	configFile := flag.String("config", "", "Path to config file")
 	flag.Parse()
 
@@ -138,13 +53,16 @@ func InitConfig() {
 		panic(fmt.Errorf("Unmarshal config data,err:%v \n", err))
 	}
 
+	LocalConf.AppName = appName
+
 	// 用 AppConfig 中的Nacos配置信息创建“配置中心客户端”
-	NewConfigClient()
-	// 从Nacos上获取配置，并解析给对应的 AppConfig 里面的结构体
-	InitNacosConfig()
+	newConfigClient()
+	// 从Nacos上获取配置，并解析给对应的结构体
+	initAppConfig()
+	initDatabaseConfigs()
 }
 
-func NewConfigClient() {
+func newConfigClient() {
 	var (
 		sc = make([]constant.ServerConfig, 0)
 		nc = LocalConf.Nacos
@@ -189,16 +107,36 @@ func NewConfigClient() {
 	Nc = client
 }
 
-func InitNacosConfig() {
+func initAppConfig() {
 	content, err := Nc.GetConfig(vo.ConfigParam{
-		DataId: LocalConf.ConfigName,
+		DataId: LocalConf.AppName + ".yaml",
 	})
 	if err != nil {
-		log.Fatalf("initMysqlConfig NacosClient.GetConfig err: %v", err)
+		log.Fatalf("InitAppConfig NacosClient.GetConfig err: %v", err)
 	}
 
 	err = yaml.Unmarshal([]byte(content), &Conf)
 	if err != nil {
-		log.Fatalf("initMysqlConfig yaml.Unmarshal err: %v", err)
+		log.Fatalf("InitAppConfig yaml.Unmarshal err: %v", err)
+	}
+}
+
+func initDatabaseConfigs() {
+	initConfig(MysqlConfigKey, &Conf.Database.MysqlConf)
+	initConfig(RedisConfigKey, &Conf.Database.RedisConf)
+	initConfig(MongoConfigKey, &Conf.Database.MongoConf)
+}
+
+func initConfig(configKey string, target interface{}) {
+	content, err := Nc.GetConfig(vo.ConfigParam{
+		DataId: configKey,
+	})
+	if err != nil {
+		log.Fatalf("Failed to initialize %s config: %v", configKey, err)
+	}
+
+	err = yaml.Unmarshal([]byte(content), target)
+	if err != nil {
+		log.Fatalf("Failed to unmarshal %s config: %v", configKey, err)
 	}
 }

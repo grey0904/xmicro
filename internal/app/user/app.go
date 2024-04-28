@@ -15,12 +15,16 @@ import (
 	"xmicro/internal/common/logs"
 	"xmicro/internal/core/repo"
 	"xmicro/internal/nacos"
+	"xmicro/internal/utils/u_conv"
 )
 
 // RunV1 启动程序 启动grpc服务 启用http服务  启用日志 启用数据库
 func RunV1(ctx context.Context) error {
+	appName := config.LocalConf.AppName
+
 	logs.Init()
-	appName := config.Conf.AppName
+
+	//注册 grpc service 需要数据库 mongo redis
 	manager := repo.New()
 
 	// 注册服务
@@ -28,18 +32,17 @@ func RunV1(ctx context.Context) error {
 
 	//启动grpc服务端
 	server := grpc.NewServer()
-	//注册 grpc service 需要数据库 mongo redis
 
 	go func() {
-		lis, err := net.Listen("tcp", config.Conf.Grpc.Addr)
+		addr := config.Conf.Grpc.Host + ":" + u_conv.Uint64ToString(config.Conf.Grpc.Port)
+		lis, err := net.Listen("tcp", addr)
 		if err != nil {
 			logs.Fatal("user grpc server listen err:%v", err)
 		}
 
 		pb.RegisterUserServiceServer(server, &service.UserService{})
-		//阻塞操作
-		err = server.Serve(lis)
-		if err != nil {
+
+		if err = server.Serve(lis); err != nil {
 			logs.Fatal("user grpc server run failed err:%v", err)
 		}
 	}()
@@ -91,7 +94,8 @@ func RunV2(ctx context.Context) error {
 	//注册 grpc service 需要数据库 mongo redis
 
 	go func() {
-		lis, err := net.Listen("tcp", config.Conf.Grpc.Addr)
+		addr := config.Conf.Grpc.Host + ":" + u_conv.Uint64ToString(config.Conf.Grpc.Port)
+		lis, err := net.Listen("tcp", addr)
 		if err != nil {
 			logs.Fatal("user grpc server listen err:%v", err)
 		}

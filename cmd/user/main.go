@@ -11,8 +11,9 @@ import (
 )
 
 func main() {
+
 	// 1.加载配置
-	config.InitConfig() // 用viper将config/dev/nacos-local.yaml文件的数据解析到 AppConfig 结构体
+	config.InitConfig("user") // 用viper将config/dev/nacos-local.yaml文件的数据解析到 AppConfig 结构体
 
 	//2.启动监控
 	go func() {
