@@ -22,12 +22,43 @@ type Nacos struct {
 
 // Config 服务相关配置，配置存放在
 type Config struct {
-	Database   Database   `yaml:"db"`
-	MetricPort int        `yaml:"metricPort"`
-	HttpPort   int        `yaml:"httpPort"`
-	ZapLog     ZapLogConf `yaml:"zapLog"`
-	Etcd       EtcdConf   `yaml:"etcd"`
-	Grpc       GrpcConf   `yaml:"grpc"`
+	Database   Database                `yaml:"db"`
+	MetricPort int                     `yaml:"metricPort"`
+	HttpPort   int                     `yaml:"httpPort"`
+	ZapLog     ZapLogConf              `yaml:"zapLog"`
+	Etcd       EtcdConf                `yaml:"etcd"`
+	Grpc       GrpcConf                `yaml:"grpc"`
+	Jwt        JwtConf                 `yaml:"jwt"`
+	Domain     map[string]Domain       `yaml:"domain"`
+	Services   map[string]ServicesConf `yaml:"services"`
+}
+
+type ServicesConf struct {
+	Id         string `yaml:"id"`
+	ClientHost string `yaml:"clientHost"`
+	ClientPort int    `yaml:"clientPort"`
+}
+type Domain struct {
+	Name        string `yaml:"name"`
+	LoadBalance bool   `yaml:"loadBalance"`
+}
+type JwtConf struct {
+	Secret string `yaml:"secret"`
+	Exp    int64  `yaml:"exp"`
+}
+type ZapLogConf struct {
+	Level zapcore.Level `yaml:"level"`
+	File  string        `yaml:"file"`
+}
+type EtcdConf struct {
+	Addrs       []string       `yaml:"addrs"`
+	RWTimeout   int            `yaml:"rwTimeout"`
+	DialTimeout int            `yaml:"dialTimeout"`
+	Register    RegisterServer `yaml:"register"`
+}
+type GrpcConf struct {
+	Host string `yaml:"host"`
+	Port uint64 `yaml:"port"`
 }
 
 type RegisterServer struct {
@@ -74,21 +105,4 @@ type MongoConf struct {
 	Password    string `yaml:"password"`
 	MinPoolSize int    `yaml:"minPoolSize"`
 	MaxPoolSize int    `yaml:"maxPoolSize"`
-}
-
-type ZapLogConf struct {
-	Level zapcore.Level `yaml:"level"`
-	File  string        `yaml:"file"`
-}
-
-type EtcdConf struct {
-	Addrs       []string       `yaml:"addrs"`
-	RWTimeout   int            `yaml:"rwTimeout"`
-	DialTimeout int            `yaml:"dialTimeout"`
-	Register    RegisterServer `yaml:"register"`
-}
-
-type GrpcConf struct {
-	Host string `yaml:"host"`
-	Port uint64 `yaml:"port"`
 }

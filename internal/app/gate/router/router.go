@@ -1,15 +1,16 @@
 package router
 
 import (
-	"gate/api"
-	"gate/auth"
 	"github.com/gin-gonic/gin"
+	"xmicro/internal/app/gate/api"
+	"xmicro/internal/app/gate/auth"
 	"xmicro/internal/common/config"
+	"xmicro/internal/common/rpc"
 )
 
 // RegisterRouter 注册路由
 func RegisterRouter() *gin.Engine {
-	if config.Conf.ZapLog.Level == 1 {
+	if config.Conf.ZapLog.Level == -1 {
 		gin.SetMode(gin.DebugMode)
 	} else {
 		gin.SetMode(gin.ReleaseMode)

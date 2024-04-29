@@ -7,7 +7,7 @@ import (
 const OK = 0
 
 var (
-	Fail                        = NewError(1, errors.New("请求失败"))
+	RequestFail                 = NewError(1, errors.New("请求失败"))
 	RequestDataError            = NewError(2, errors.New("请求数据错误"))
 	SqlError                    = NewError(3, errors.New("数据库操作错误"))
 	InvalidUsers                = NewError(4, errors.New("无效用户"))

@@ -9,11 +9,11 @@ import (
 	"log"
 	"sync"
 	"sync/atomic"
-	"xmicro/internal/app/order/pb"
+	"xmicro/internal/app/user/pb"
 )
 
 var (
-	OrderServiceClients []pb.OrderServiceClient
+	OrderServiceClients []pb.UserServiceClient
 	nextClientIndex     int32
 	clientMu            sync.Mutex
 )
@@ -64,7 +64,7 @@ func updateGrpcClients(services []model.Instance) {
 			log.Printf("Failed to connect to gRPC service: %v", err)
 			continue
 		}
-		OrderServiceClients = append(OrderServiceClients, pb.NewOrderServiceClient(conn))
+		OrderServiceClients = append(OrderServiceClients, pb.NewUserServiceClient(conn))
 	}
 
 	if len(OrderServiceClients) == 0 {
@@ -72,7 +72,7 @@ func updateGrpcClients(services []model.Instance) {
 	}
 }
 
-func GetNextOrderClient() pb.OrderServiceClient {
+func GetNextOrderClient() pb.UserServiceClient {
 	clientMu.Lock()
 	defer clientMu.Unlock()
 

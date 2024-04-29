@@ -12,3 +12,70 @@
 2024-04-28T20:29:32.983+0800	FATAL	logs/zap.go:74	clients.RegisterInstance error: retry 3 times request failed!: request return error code 400	{"app": "user"}
 2024-04-28T20:30:43.333+0800	FATAL	logs/zap.go:74	clients.RegisterInstance error: retry 3 times request failed!: request return error code 400	{"app": "user"}
 2024-04-28T20:32:05.936+0800	FATAL	logs/zap.go:74	clients.RegisterInstance error: retry 3 times request failed!: request return error code 400	{"app": "user"}
+2024-04-29T23:53:07.495+0800	FATAL	logs/zap.go:74	Failed to deregister from Nacos: 0x10164e850	{"app": "user"}
+2024-04-30T00:01:47.318+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-04-30T00:04:03.933+0800	INFO	logs/zap.go:68	unregister etcd...	{"app": "user"}
+2024-04-30T00:04:06.908+0800	INFO	logs/zap.go:68	stop app finish	{"app": "user"}
+2024-04-30T00:04:06.908+0800	INFO	logs/zap.go:68	user app quit	{"app": "user"}
+2024-04-30T00:04:27.509+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-04-30T00:05:11.716+0800	ERROR	logs/zap.go:72	close and Revoke lease failed,err:etcdserver: requested lease not found	{"app": "user"}
+2024-04-30T00:05:11.716+0800	INFO	logs/zap.go:68	unregister etcd...	{"app": "user"}
+2024-04-30T00:05:14.699+0800	INFO	logs/zap.go:68	stop app finish	{"app": "user"}
+2024-04-30T00:05:14.702+0800	INFO	logs/zap.go:68	user app quit	{"app": "user"}
+2024-04-30T00:05:22.705+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-04-30T00:07:48.586+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:08:48.605+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:09:48.608+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:10:48.603+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:11:48.616+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:12:48.627+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:24:23.566+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:25:23.567+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:26:23.562+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:27:35.391+0800	ERROR	logs/zap.go:72	grpc client get etcd failed, name=/user/v1,err:context deadline exceeded	{"app": "gate"}
+2024-04-30T00:27:35.391+0800	ERROR	logs/zap.go:72	watch sync failed,err:context deadline exceeded	{"app": "gate"}
+2024-04-30T00:28:23.559+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768057 ]	{"app": "gate"}
+2024-04-30T00:28:24.769+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-04-30T00:29:23.554+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:29:23.554+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:30:23.556+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:30:23.557+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:30:49.615+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-04-30T00:31:10.485+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-04-30T00:31:23.556+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:31:23.556+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:32:23.561+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:32:23.562+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:33:11.456+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-04-30T00:33:24.050+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:10 mod_revision:10 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768297 ]	{"app": "gate"}
+2024-04-30T00:33:32.080+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-04-30T00:34:23.557+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:34:23.557+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:35:23.563+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:35:23.563+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:35:25.203+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-04-30T00:36:06.707+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-04-30T00:36:06.712+0800	INFO	logs/zap.go:68	unregister etcd...	{"app": "user"}
+2024-04-30T00:36:09.699+0800	INFO	logs/zap.go:68	stop app finish	{"app": "user"}
+2024-04-30T00:36:09.700+0800	INFO	logs/zap.go:68	user app quit	{"app": "user"}
+2024-04-30T00:36:13.124+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-04-30T00:36:23.562+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:14 mod_revision:14 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768326 ]	{"app": "gate"}
+2024-04-30T00:36:30.320+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-04-30T00:37:05.979+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-04-30T00:37:23.563+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:16 mod_revision:16 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768335 ]	{"app": "gate"}
+2024-04-30T00:38:23.565+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:16 mod_revision:16 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768335 ]	{"app": "gate"}
+2024-04-30T00:38:26.364+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-04-30T00:39:23.576+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:39:23.577+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:40:23.561+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:40:23.562+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:40:35.353+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-04-30T00:41:23.570+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:18 mod_revision:18 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878318896768366 ]	{"app": "gate"}
+2024-04-30T00:41:38.059+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-04-30T00:42:03.731+0800	INFO	logs/zap.go:68	uid:10001	{"app": "gate"}
+2024-04-30T00:42:23.565+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:42:23.566+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:43:23.566+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:43:23.573+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-04-30T00:44:23.574+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-04-30T00:44:23.576+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}

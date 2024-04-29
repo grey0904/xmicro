@@ -8,12 +8,20 @@ import (
 	"xmicro/internal/common/constant"
 	"xmicro/internal/common/result"
 	"xmicro/internal/core/dao"
+	"xmicro/internal/core/repo"
 )
 
 type UserService struct {
 	userDao  *dao.UserDao
 	redisDao *dao.RedisDao
 	pb.UnimplementedUserServiceServer
+}
+
+func NewAccountService(manager *repo.Manager) *UserService {
+	return &UserService{
+		userDao:  dao.NewAccountDao(manager),
+		redisDao: dao.NewRedisDao(manager),
+	}
 }
 
 func (a *UserService) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {

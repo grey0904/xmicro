@@ -6,6 +6,7 @@ package pb;
 
 service UserService {
   rpc Register(RegisterRequest) returns(RegisterResponse);
+  rpc FindUserByUid(UserParams) returns(UserDTO);
   rpc GetUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse);
 }
 

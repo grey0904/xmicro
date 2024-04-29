@@ -81,9 +81,11 @@ func RunV1(ctx context.Context) error {
 	}
 }
 
-// RunV2 启动程序 启动grpc服务 启用http服务  启用日志 启用数据库
+// RunV2 Etcd版：启动程序 启动grpc服务 启用http服务  启用日志 启用数据库
 func RunV2(ctx context.Context) error {
 	logs.Init()
+
+	//注册 grpc service 需要数据库 mongo redis
 	manager := repo.New()
 
 	//etcd注册中心 grpc服务注册到etcd中 客户端访问的时候 通过etcd获取grpc的地址
@@ -91,7 +93,6 @@ func RunV2(ctx context.Context) error {
 
 	//启动grpc服务端
 	server := grpc.NewServer()
-	//注册 grpc service 需要数据库 mongo redis
 
 	go func() {
 		addr := config.Conf.Grpc.Host + ":" + u_conv.Uint64ToString(config.Conf.Grpc.Port)
@@ -99,12 +100,14 @@ func RunV2(ctx context.Context) error {
 		if err != nil {
 			logs.Fatal("user grpc server listen err:%v", err)
 		}
+
 		err = register.Register(config.Conf.Etcd)
 		if err != nil {
 			logs.Fatal("user grpc server register etcd err:%v", err)
 		}
-		pb.RegisterUserServiceServer(server, &service.UserService{})
-		//阻塞操作
+
+		pb.RegisterUserServiceServer(server, service.NewAccountService(manager))
+
 		err = server.Serve(lis)
 		if err != nil {
 			logs.Fatal("user grpc server run failed err:%v", err)

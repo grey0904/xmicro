@@ -1,32 +1,41 @@
-package controller
+package api
 
 import (
+	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"time"
+	"xmicro/internal/app/user/pb"
 	"xmicro/internal/common/config"
+	"xmicro/internal/common/jwts"
 	"xmicro/internal/common/logs"
+	"xmicro/internal/common/result"
+	"xmicro/internal/common/rpc"
 )
 
-type UserController struct {
+type UserHandler struct {
 }
 
-func (u *UserController) Register(ctx *gin.Context) {
+func NewUserHandler() *UserHandler {
+	return &UserHandler{}
+}
+
+func (u *UserHandler) Register(ctx *gin.Context) {
 	//接收参数
-	var req pb.RegisterParams
+	var req pb.RegisterRequest
 	err2 := ctx.ShouldBindJSON(&req)
 	if err2 != nil {
-		common.Fail(ctx, biz.RequestDataError)
+		result.Fail(ctx, result.RequestDataError)
 		return
 	}
 	response, err := rpc.UserClient.Register(context.TODO(), &req)
 	if err != nil {
-		common.Fail(ctx, msError.ToError(err))
+		result.Fail(ctx, result.ToError(err))
 		return
 	}
 	uid := response.Uid
 	if len(uid) == 0 {
-		common.Fail(ctx, biz.SqlError)
+		result.Fail(ctx, result.SqlError)
 		return
 	}
 	logs.Info("uid:%s", uid)
@@ -40,15 +49,15 @@ func (u *UserController) Register(ctx *gin.Context) {
 	token, err := jwts.GenToken(&claims, config.Conf.Jwt.Secret)
 	if err != nil {
 		logs.Error("Register jwt gen token err:%v", err)
-		common.Fail(ctx, biz.Fail)
+		result.Fail(ctx, result.RequestFail)
 		return
 	}
-	result := map[string]any{
+	resp := map[string]any{
 		"token": token,
 		"serverInfo": map[string]any{
 			"host": config.Conf.Services["connector"].ClientHost,
 			"port": config.Conf.Services["connector"].ClientPort,
 		},
 	}
-	common.Success(ctx, result)
+	result.Success(ctx, resp)
 }
