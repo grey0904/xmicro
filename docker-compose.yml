@@ -7,6 +7,7 @@ services:
       - "4222:4222"
     command: "--http_port 8222 "
     networks: ["nats"]
+  # 默认也会安装 etcdctl
   etcd:
     image: bitnami/etcd:${ETCD_VERSION}
     container_name: etcd3
@@ -20,8 +21,8 @@ services:
       - ETCD_QUOTA_BACKEND_BYTES=6442450944
     privileged: true
     ports:
-      - ${ETCD_PORT}:2379
-      - "2380:2380"
+      - ${ETCD_PORT}:2379 # 客户端接口的默认端口
+      - "2380:2380" # 集群间通信的默认端口
   mongo:
     image: mongo:4.2.1
     container_name: mongo

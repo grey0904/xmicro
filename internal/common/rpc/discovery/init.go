@@ -1,4 +1,4 @@
-package rpc
+package discovery
 
 import (
 	"context"
@@ -8,8 +8,8 @@ import (
 	"google.golang.org/grpc/resolver"
 	"xmicro/internal/app/user/pb"
 	"xmicro/internal/common/config"
-	"xmicro/internal/common/discovery"
 	"xmicro/internal/common/logs"
+	"xmicro/internal/common/registry"
 )
 
 var (
@@ -18,7 +18,7 @@ var (
 
 func Init() {
 	//etcd解析器 就可以grpc连接的时候 进行触发，通过提供的addr地址 去etcd中进行查找
-	r := discovery.NewResolver(config.Conf.Etcd)
+	r := registry.NewResolver(config.Conf.Etcd)
 	resolver.Register(r)
 	userDomain := config.Conf.Domain["user"]
 	initClient(userDomain.Name, userDomain.LoadBalance, &UserClient)

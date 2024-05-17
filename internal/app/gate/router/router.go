@@ -5,7 +5,7 @@ import (
 	"xmicro/internal/app/gate/api"
 	"xmicro/internal/app/gate/auth"
 	"xmicro/internal/common/config"
-	"xmicro/internal/common/rpc"
+	"xmicro/internal/common/rpc/discovery"
 )
 
 // RegisterRouter 注册路由
@@ -16,7 +16,7 @@ func RegisterRouter() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	//初始化grpc的client gate是做为grpc的客户端 去调用user grpc服务
-	rpc.Init()
+	discovery.Init()
 	r := gin.Default()
 	r.Use(auth.Cors())
 	userHandler := api.NewUserHandler()

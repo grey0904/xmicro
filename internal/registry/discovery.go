@@ -1,4 +1,4 @@
-package nacos
+package registry
 
 import (
 	"errors"

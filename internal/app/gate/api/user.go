@@ -10,7 +10,7 @@ import (
 	"xmicro/internal/common/jwts"
 	"xmicro/internal/common/logs"
 	"xmicro/internal/common/result"
-	"xmicro/internal/common/rpc"
+	"xmicro/internal/common/rpc/discovery"
 )
 
 type UserHandler struct {
@@ -28,7 +28,7 @@ func (u *UserHandler) Register(ctx *gin.Context) {
 		result.Fail(ctx, result.RequestDataError)
 		return
 	}
-	response, err := rpc.UserClient.Register(context.TODO(), &req)
+	response, err := discovery.UserClient.Register(context.TODO(), &req)
 	if err != nil {
 		result.Fail(ctx, result.ToError(err))
 		return

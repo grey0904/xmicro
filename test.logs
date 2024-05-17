@@ -79,3 +79,308 @@
 2024-04-30T00:43:23.573+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
 2024-04-30T00:44:23.574+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
 2024-04-30T00:44:23.576+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T11:05:51.031+0800	FATAL	logs/zap.go:74	mongo ping err:server selection error: context deadline exceeded, current topology: { Type: Unknown, Servers: [{ Addr: 127.0.0.1:27017, Type: Unknown, Last error: dial tcp 127.0.0.1:27017: connect: connection refused }, ] }	{"app": "user"}
+2024-05-16T11:16:30.677+0800	FATAL	logs/zap.go:74	mongo ping err:server selection error: context deadline exceeded, current topology: { Type: Unknown, Servers: [{ Addr: 127.0.0.1:27017, Type: Unknown, Last error: dial tcp 127.0.0.1:27017: connect: connection refused }, ] }	{"app": "user"}
+2024-05-16T11:39:10.892+0800	FATAL	logs/zap.go:74	Error pinging MySQL server: Error 1049 (42000): Unknown database 'moon'
+	{"app": "user"}
+2024-05-16T11:47:16.113+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-05-16T11:49:32.324+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:50:32.334+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:51:32.334+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:52:32.333+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:53:32.336+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:54:32.335+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:55:32.335+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:56:32.335+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:57:32.336+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:58:32.336+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T11:59:32.337+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:00:32.338+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:01:32.338+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:02:32.338+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:03:32.338+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:04:32.339+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:05:32.339+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:06:32.340+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:07:32.341+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:08:32.342+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:09:32.342+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:10:32.343+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:11:32.343+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:12:32.344+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:13:32.344+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:14:32.344+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:15:32.289+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:16:32.289+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:17:32.288+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:18:32.288+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:19:32.286+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:20:32.287+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:21:32.286+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:22:32.287+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:23:32.286+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:24:32.286+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:25:32.285+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:26:32.284+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:27:32.286+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:6 mod_revision:6 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170564 ]	{"app": "gate"}
+2024-05-16T12:31:09.767+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-05-16T12:31:54.600+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:31:54.600+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:32:54.596+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:32:54.597+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:33:54.594+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:33:54.595+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:34:54.594+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:34:54.595+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:35:54.593+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:35:54.594+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:36:54.591+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:36:54.592+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:37:54.591+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:37:54.591+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:38:54.591+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:38:54.592+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:39:54.590+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:39:54.591+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:40:54.589+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:40:54.590+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:41:54.589+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:41:54.589+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:42:54.588+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:42:54.588+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:43:54.587+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:43:54.588+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:44:54.588+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:44:54.588+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:45:54.587+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:45:54.587+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:46:54.583+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:46:54.583+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:47:54.559+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:47:54.559+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:48:54.556+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:48:54.557+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:49:54.555+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:49:54.555+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:50:54.555+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:50:54.556+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:51:54.553+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:51:54.553+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:52:54.552+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:52:54.552+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:53:54.551+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:53:54.552+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:54:54.550+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:54:54.550+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:55:54.549+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:55:54.549+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:56:54.549+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:56:54.549+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:57:54.546+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:57:54.547+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:58:54.545+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:58:54.546+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T12:59:54.544+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T12:59:54.545+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:00:54.543+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:00:54.544+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:01:54.542+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:01:54.543+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:02:54.540+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:02:54.540+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:03:54.537+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:03:54.538+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:04:54.536+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:04:54.536+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:05:54.536+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:05:54.536+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:06:54.535+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:06:54.535+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:07:54.534+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:07:54.535+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:08:54.532+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:08:54.532+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:09:54.531+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:09:54.532+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:10:54.529+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:10:54.530+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:11:54.528+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:11:54.529+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:12:54.528+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:12:54.528+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:13:54.527+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:13:54.528+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:14:54.526+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:14:54.527+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:15:54.525+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:15:54.525+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:16:54.523+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:16:54.523+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:17:54.522+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:17:54.523+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:18:54.467+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:18:54.468+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:19:54.465+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:19:54.465+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:20:54.464+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:20:54.465+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:21:54.462+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:21:54.463+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:22:54.460+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:22:54.460+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:23:54.458+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:23:54.459+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:24:54.457+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:24:54.458+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:25:54.455+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:25:54.455+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:26:54.454+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:26:54.455+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:27:54.453+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:27:54.453+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:28:54.451+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:28:54.451+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:29:54.449+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:29:54.450+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:31:25.555+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:31:25.556+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:32:25.513+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:32:25.513+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:33:25.510+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:33:25.510+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:34:25.508+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:34:25.509+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:35:25.504+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:35:25.504+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:36:25.502+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:36:25.503+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:37:25.499+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:37:25.500+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:38:25.497+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:38:25.497+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:39:25.495+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:39:25.496+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:40:25.492+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:40:25.492+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:41:25.489+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:41:25.490+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:42:25.487+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:42:25.487+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:43:25.484+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:43:25.485+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:44:25.482+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:44:25.482+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:45:25.480+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:45:25.480+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:46:25.477+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:46:25.477+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:47:25.474+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:47:25.474+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:48:25.471+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:48:25.472+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:49:25.469+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:49:25.470+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:50:25.466+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:50:25.467+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:51:25.464+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:51:25.465+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:52:25.461+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:52:25.461+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:53:25.458+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:53:25.459+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:54:25.456+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:54:25.456+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:55:25.453+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:55:25.453+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:56:25.451+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:56:25.451+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:57:25.449+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:57:25.450+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:58:25.486+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:58:25.486+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T13:59:25.488+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T13:59:25.488+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:00:25.486+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:00:25.486+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:01:25.484+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:01:25.486+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:02:25.482+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:02:25.482+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:03:25.480+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:03:25.480+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:04:25.480+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:04:25.480+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:05:25.477+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:05:25.477+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:06:25.485+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:06:25.485+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:07:25.473+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:07:25.473+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:08:25.472+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:08:25.472+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:09:25.492+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:09:25.492+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:10:25.468+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:10:25.469+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:11:25.466+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:11:25.466+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:12:25.465+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:12:25.465+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:12:57.771+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:12:57.771+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:13:25.462+0800	INFO	logs/zap.go:68	[]	{"app": "gate"}
+2024-05-16T14:13:25.462+0800	ERROR	logs/zap.go:72	no service found	{"app": "gate"}
+2024-05-16T14:13:37.093+0800	ERROR	logs/zap.go:72	close and Revoke lease failed,err:etcdserver: requested lease not found	{"app": "user"}
+2024-05-16T14:13:37.094+0800	INFO	logs/zap.go:68	unregister etcd...	{"app": "user"}
+2024-05-16T14:13:40.067+0800	INFO	logs/zap.go:68	stop app finish	{"app": "user"}
+2024-05-16T14:13:40.067+0800	INFO	logs/zap.go:68	user app quit	{"app": "user"}
+2024-05-16T14:13:43.173+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-05-16T14:13:43.191+0800	INFO	logs/zap.go:68	uid:10001	{"app": "gate"}
+2024-05-16T14:13:48.682+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-05-16T14:13:48.682+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-05-16T14:13:48.696+0800	INFO	logs/zap.go:68	unregister etcd...	{"app": "user"}
+2024-05-16T14:13:51.667+0800	INFO	logs/zap.go:68	stop app finish	{"app": "user"}
+2024-05-16T14:13:51.667+0800	INFO	logs/zap.go:68	user app quit	{"app": "user"}
+2024-05-16T14:13:57.465+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-05-16T14:13:57.778+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:13:58.677+0800	INFO	logs/zap.go:68	stop app finish	{"app": "gate"}
+2024-05-16T14:13:58.678+0800	INFO	logs/zap.go:68	user app quit	{"app": "gate"}
+2024-05-16T14:14:01.588+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:14:50.331+0800	INFO	logs/zap.go:68	uid:10002	{"app": "gate"}
+2024-05-16T14:15:01.591+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:16:01.589+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:17:01.587+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:18:01.585+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:19:01.651+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:20:01.650+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:21:01.651+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:22:01.649+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:23:01.649+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:24:01.647+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:25:01.647+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:26:01.647+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:27:01.645+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:28:01.644+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:29:01.644+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:30:01.644+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:31:01.644+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:32:01.643+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:33:01.640+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:34:01.642+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:35:01.644+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:36:01.639+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:37:01.638+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:38:01.638+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:39:01.636+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:40:01.639+0800	INFO	logs/zap.go:68	[key:"/user/v1/127.0.0.1:11500" create_revision:11 mod_revision:11 version:1 value:"{\"name\":\"user\",\"addr\":\"127.0.0.1:11500\",\"weight\":10,\"version\":\"v1\",\"ttl\":10}" lease:7587878723891170726 ]	{"app": "gate"}
+2024-05-16T14:40:22.259+0800	ERROR	logs/zap.go:72	grpc client update(EventTypeDelete) parse etcd value failed, name=/user/v1,err:invalid key	{"app": "gate"}
+2024-05-16T14:40:22.270+0800	INFO	logs/zap.go:68	unregister etcd...	{"app": "user"}
+2024-05-16T14:40:25.250+0800	INFO	logs/zap.go:68	stop app finish	{"app": "gate"}
+2024-05-16T14:40:25.250+0800	INFO	logs/zap.go:68	user app quit	{"app": "gate"}
+2024-05-16T14:40:25.255+0800	INFO	logs/zap.go:68	stop app finish	{"app": "user"}
+2024-05-16T14:40:25.256+0800	INFO	logs/zap.go:68	user app quit	{"app": "user"}
+2024-05-16T17:35:19.774+0800	FATAL	logs/zap.go:74	Successfully deregistered from Nacos	{"app": "user"}
+2024-05-16T18:00:30.109+0800	INFO	logs/zap.go:68	register service success,key=/user/v1/127.0.0.1:11500	{"app": "user"}
+2024-05-17T10:42:15.345+0800	FATAL	logs/zap.go:74	mongo ping err:server selection error: context deadline exceeded, current topology: { Type: Unknown, Servers: [{ Addr: 127.0.0.1:27017, Type: Unknown, Last error: dial tcp 127.0.0.1:27017: connect: connection refused }, ] }	{"app": "user"}
+2024-05-17T10:43:56.811+0800	INFO	logs/zap.go:68	stop app finish	{"app": "user"}
+2024-05-17T10:43:56.812+0800	INFO	logs/zap.go:68	user app quit	{"app": "user"}

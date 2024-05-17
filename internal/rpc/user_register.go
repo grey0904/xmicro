@@ -2,7 +2,7 @@ package rpc
 
 import (
 	"context"
-	"xmicro/internal/proto/pb"
+	"xmicro/internal/app/user/pb"
 )
 
 type UserServer struct {

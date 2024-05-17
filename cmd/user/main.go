@@ -24,7 +24,7 @@ func main() {
 	}()
 
 	//3.启动 http、grpc 服务端
-	err := user.RunV2(context.Background())
+	err := user.RunV1(context.Background())
 	if err != nil {
 		log.Println(err)
 		os.Exit(-1)
