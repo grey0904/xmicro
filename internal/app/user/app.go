@@ -2,7 +2,6 @@ package user
 
 import (
 	"context"
-	"fmt"
 	"google.golang.org/grpc"
 	"net"
 	"os"
@@ -13,14 +12,15 @@ import (
 	"xmicro/internal/app/user/service"
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/logs"
+	"xmicro/internal/core/registry/nacos"
 	"xmicro/internal/core/repo"
-	"xmicro/internal/registry"
 	"xmicro/internal/utils/u_conv"
 )
 
 // RunV1 启动程序 启动grpc服务 启用http服务  启用日志 启用数据库
 func RunV1(ctx context.Context) error {
 	appName := config.LocalConf.AppName
+	serviceName := "grpc:" + appName
 
 	logs.Init()
 
@@ -28,15 +28,9 @@ func RunV1(ctx context.Context) error {
 	manager := repo.New()
 
 	// 注册服务
-	var fac registry.RegistrarFactory
-	fac = new(registry.NacosFactory)
-	var reg registry.Registrar
-	reg, err := fac.CreateRegistrar()
-	if err != nil {
-		return fmt.Errorf("failed to CreateRegistrar: %v", err)
-	}
-	if err = reg.Register(appName); err != nil {
-		return fmt.Errorf("failed to register service: %v", err)
+	reg := nacos.GetInstance()
+	if err := reg.Register(serviceName); err != nil {
+		return err
 	}
 
 	//启动grpc服务端
@@ -58,7 +52,7 @@ func RunV1(ctx context.Context) error {
 	stop := func() {
 		server.Stop()
 		manager.Close()
-		if err := reg.Deregister(appName); err != nil {
+		if err := reg.Deregister(serviceName); err != nil {
 			logs.Error("failed to deregister service: %v", err)
 		}
 		time.Sleep(3 * time.Second)
