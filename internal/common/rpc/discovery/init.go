@@ -9,7 +9,7 @@ import (
 	"xmicro/internal/app/user/pb"
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/logs"
-	"xmicro/internal/common/registry"
+	"xmicro/internal/core/registry/etcd"
 )
 
 var (
@@ -18,7 +18,7 @@ var (
 
 func Init() {
 	//etcd解析器 就可以grpc连接的时候 进行触发，通过提供的addr地址 去etcd中进行查找
-	r := registry.NewResolver(config.Conf.Etcd)
+	r := etcd.NewResolver()
 	resolver.Register(r)
 	userDomain := config.Conf.Domain["user"]
 	initClient(userDomain.Name, userDomain.LoadBalance, &UserClient)
