@@ -1,59 +1,60 @@
 package registry
 
 import (
-	"errors"
 	"fmt"
-	"github.com/nacos-group/nacos-sdk-go/v2/model"
-	"github.com/nacos-group/nacos-sdk-go/v2/vo"
-	"google.golang.org/grpc"
 	"log"
 	"sync"
 	"sync/atomic"
-	"xmicro/internal/app/user/pb"
+
+	"github.com/nacos-group/nacos-sdk-go/v2/clients/naming_client"
+	"github.com/nacos-group/nacos-sdk-go/v2/model"
+	"github.com/nacos-group/nacos-sdk-go/v2/vo"
+	"gitlab.casinovip.tech/minigame_backend/om_struct/im_proto/im"
+	"google.golang.org/grpc"
 )
 
 var (
-	OrderServiceClients []pb.UserServiceClient
-	nextClientIndex     int32
-	clientMu            sync.Mutex
+	imServiceClients []im.ImServiceClient
+	nextClientIndex  int32
+	clientMu         sync.Mutex
 )
 
-func DiscoveryFromNacos(svcName string) {
-	svcName = "grpc:" + svcName
+// Setup initializes service discovery
+func Setup() {
 	client, err := NewNamingClient()
 	if err != nil {
-		panic(err)
+		log.Printf("Nacos NewNamingClient error: %v", err)
+		return
 	}
 
 	err = client.Subscribe(&vo.SubscribeParam{
-		ServiceName: svcName,
+		ServiceName: "grpc:im",
 		SubscribeCallback: func(services []model.Instance, err error) {
 			if err != nil {
-				panic(err)
+				log.Printf("nacos subscribe service error: %v", err)
+				return
 			}
 
 			updateGrpcClients(services)
 		},
 	})
 	if err != nil {
-		panic(err)
+		log.Printf("Nacos Subscribe error: %v", err)
+		return
 	}
 
-	services, err := client.SelectAllInstances(vo.SelectAllInstancesParam{
-		ServiceName: svcName,
-	})
+	err = updateServiceInfo(client)
 	if err != nil {
-		panic(err)
+		log.Printf("Nacos failed to get initial service info: %v", err)
+		return
 	}
-
-	updateGrpcClients(services)
 }
 
 func updateGrpcClients(services []model.Instance) {
 	clientMu.Lock()
 	defer clientMu.Unlock()
 
-	OrderServiceClients = nil
+	imServiceClients = nil
 	for _, service := range services {
 		log.Printf("ServiceName: %s, IP: %s, Port: %d, Metadata: %s\n",
 			service.ServiceName, service.Ip, service.Port, service.Metadata)
@@ -64,22 +65,35 @@ func updateGrpcClients(services []model.Instance) {
 			log.Printf("Failed to connect to gRPC service: %v", err)
 			continue
 		}
-		OrderServiceClients = append(OrderServiceClients, pb.NewUserServiceClient(conn))
+		imServiceClients = append(imServiceClients, im.NewImServiceClient(conn))
 	}
 
-	if len(OrderServiceClients) == 0 {
-		log.Printf("No available gRPC service")
+	if len(imServiceClients) == 0 {
+		log.Printf("No available gRPC services")
 	}
 }
 
-func GetNextOrderClient() pb.UserServiceClient {
+func updateServiceInfo(client naming_client.INamingClient) error {
+	services, err := client.SelectAllInstances(vo.SelectAllInstancesParam{
+		ServiceName: "grpc:im",
+	})
+	if err != nil {
+		return fmt.Errorf("nacos GetService error: %w", err)
+	}
+
+	updateGrpcClients(services)
+
+	return nil
+}
+
+func GetNextClient() im.ImServiceClient {
 	clientMu.Lock()
 	defer clientMu.Unlock()
 
-	if len(OrderServiceClients) == 0 {
-		panic(errors.New("no available gRPC clients"))
+	if len(imServiceClients) == 0 {
+		//panic(exception.New(exception.ImNoAvailableGrpcClients, errors.New("")))
 	}
 
 	index := atomic.AddInt32(&nextClientIndex, 1)
-	return OrderServiceClients[index%int32(len(OrderServiceClients))]
+	return imServiceClients[index%int32(len(imServiceClients))]
 }
