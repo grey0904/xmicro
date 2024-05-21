@@ -8,7 +8,8 @@
 * grpc
 
 ### DID
-* 封装微服务服务注册 ✅
+* 封装微服务服务注册，支持Nacos、ETCD，可扩展✅
+  * 用的单例模式+工厂模式，用工厂函数实现而不是工厂类，用的`GetInstance`创建和返回 `Registry` 实例
 * 自定义返回体结构 ✅
 * zap日志 & lumberjack 记录日志 ✅
 * nacos 配置中心 ✅
@@ -24,4 +25,6 @@
 
 
 ### 项目配置
-执行 docker-compose.yml 安装基础服务
+1 执行 docker-compose.yml 安装基础服务
+2 安装nacos服务端，创建命名空间ID，将config下面的nacos配置改为新的配置
+3 将"nacos上配置文件的备份"里的服务配置文件放在nacos上，可根据需求进行调整

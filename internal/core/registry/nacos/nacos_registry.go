@@ -25,27 +25,28 @@ var reg registry.Registry
 
 func GetInstance() registry.Registry {
 	once.Do(func() {
-		client, err := NewNamingClient()
+		client, err := newNamingClient()
 		if err != nil {
 			logs.Error("NewNamingClient err:%v", err)
+			return
 		}
-		reg = &NacosRegistry{
+		reg = &Registry{
 			cli: client,
 		}
 	})
 	return reg
 }
 
-type NacosRegistry struct {
+type Registry struct {
 	cli naming_client.INamingClient
 }
 
-func (r *NacosRegistry) Register(serviceName string) error {
+func (r *Registry) Register() error {
 	instance := vo.RegisterInstanceParam{
-		Ip:          config.Conf.Grpc.Host, // Set your server IP here
-		Port:        config.Conf.Grpc.Port, // Set your server port here
-		ServiceName: serviceName,
-		Weight:      10,
+		Ip:          config.Conf.ServerRpc.Host, // Set your server IP here
+		Port:        config.Conf.ServerRpc.Port, // Set your server port here
+		ServiceName: config.LocalConf.AppName,
+		Weight:      config.Conf.Nacos.Weight,
 		Enable:      true,
 		Healthy:     true,
 	}
@@ -61,11 +62,11 @@ func (r *NacosRegistry) Register(serviceName string) error {
 	return nil
 }
 
-func (r *NacosRegistry) Deregister(serviceName string) error {
+func (r *Registry) Deregister() error {
 	instance := vo.DeregisterInstanceParam{
-		Ip:          config.Conf.Grpc.Host,
-		Port:        config.Conf.Grpc.Port,
-		ServiceName: serviceName,
+		Ip:          config.Conf.ServerRpc.Host,
+		Port:        config.Conf.ServerRpc.Port,
+		ServiceName: config.LocalConf.AppName,
 	}
 	success, err := r.cli.DeregisterInstance(instance)
 	if err != nil {
@@ -79,12 +80,12 @@ func (r *NacosRegistry) Deregister(serviceName string) error {
 	return nil
 }
 
-func (n *NacosRegistry) Discover(serviceName string) ([]registry.InstanceInfo, error) {
+func (r *Registry) Discover() ([]registry.InstanceInfo, error) {
 	// Nacos服务发现逻辑
 	return nil, nil
 }
 
-func NewNamingClient() (naming_client.INamingClient, error) {
+func newNamingClient() (naming_client.INamingClient, error) {
 	var (
 		sc = make([]constant.ServerConfig, 0)
 		nc = config.LocalConf.Nacos
@@ -136,7 +137,7 @@ var (
 
 // Setup initializes service discovery
 func Setup() {
-	client, err := NewNamingClient()
+	client, err := newNamingClient()
 	if err != nil {
 		log.Printf("Nacos NewNamingClient error: %v", err)
 		return

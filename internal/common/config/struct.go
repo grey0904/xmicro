@@ -4,8 +4,8 @@ import "go.uber.org/zap/zapcore"
 
 // LocalConfig 本地的 nacos 配置
 type LocalConfig struct {
-	Nacos   Nacos  `yaml:"nacos"`
-	AppName string `yaml:"appName"`
+	Nacos   Nacos  `yaml:"nacos"`   // nacos服务端配置，配置文件在config下面
+	AppName string `yaml:"appName"` // 应用名称
 }
 
 type Nacos struct {
@@ -22,15 +22,31 @@ type Nacos struct {
 
 // Config 服务相关配置，配置存放在
 type Config struct {
-	Database   Database                `yaml:"db"`
-	MetricPort int                     `yaml:"metricPort"`
-	HttpPort   int                     `yaml:"httpPort"`
-	ZapLog     ZapLogConf              `yaml:"zapLog"`
-	Etcd       EtcdConf                `yaml:"etcd"`
-	Grpc       GrpcConf                `yaml:"grpc"`
-	Jwt        JwtConf                 `yaml:"jwt"`
-	Domain     map[string]Domain       `yaml:"domain"`
-	Services   map[string]ServicesConf `yaml:"services"`
+	ServerHttp    ServerHttpConf          `yaml:"serverHttp"`
+	ServerRpc     ServerRpcConf           `yaml:"serverRpc"`
+	ServerMetrics ServerMetricsConf       `yaml:"serverMetrics"`
+	Database      Database                `yaml:"db"`
+	ZapLog        ZapLogConf              `yaml:"zapLog"`
+	Nacos         NacosConf               `yaml:"nacos"`
+	Etcd          EtcdConf                `yaml:"etcd"`
+	Jwt           JwtConf                 `yaml:"jwt"`
+	Domain        map[string]Domain       `yaml:"domain"`
+	Services      map[string]ServicesConf `yaml:"services"`
+}
+
+type ServerHttpConf struct {
+	Host string `yaml:"host"`
+	Port uint64 `yaml:"port"`
+}
+
+type ServerRpcConf struct {
+	Host string `yaml:"host"`
+	Port uint64 `yaml:"port"`
+}
+
+type ServerMetricsConf struct {
+	Host string `yaml:"host"`
+	Port uint64 `yaml:"port"`
 }
 
 type ServicesConf struct {
@@ -50,20 +66,19 @@ type ZapLogConf struct {
 	Level zapcore.Level `yaml:"level"`
 	File  string        `yaml:"file"`
 }
+
+type NacosConf struct {
+	Weight float64 `yaml:"weight"`
+}
+
 type EtcdConf struct {
 	Addrs       []string       `yaml:"addrs"`
 	RWTimeout   int            `yaml:"rwTimeout"`
 	DialTimeout int            `yaml:"dialTimeout"`
 	Register    RegisterServer `yaml:"register"`
 }
-type GrpcConf struct {
-	Host string `yaml:"host"`
-	Port uint64 `yaml:"port"`
-}
 
 type RegisterServer struct {
-	Addr    string `yaml:"addr"`
-	Name    string `yaml:"name"`
 	Version string `yaml:"version"`
 	Weight  int    `yaml:"weight"`
 	Ttl     int64  `yaml:"ttl"` //租约时长

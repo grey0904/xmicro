@@ -17,7 +17,7 @@ func main() {
 
 	//2.启动监控
 	go func() {
-		err := metrics.Serve(fmt.Sprintf("0.0.0.0:%d", config.Conf.MetricPort))
+		err := metrics.Serve(fmt.Sprintf("%s:%d", config.Conf.ServerMetrics.Host, config.Conf.ServerMetrics.Port))
 		if err != nil {
 			panic(err)
 		}

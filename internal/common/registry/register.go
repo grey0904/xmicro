@@ -7,6 +7,7 @@ import (
 	"time"
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/logs"
+	"xmicro/internal/utils/u_conv"
 )
 
 // Register grpc服务注册到etcd
@@ -35,8 +36,8 @@ func (r *Register) Close() {
 func (r *Register) Register(conf config.EtcdConf) error {
 	//注册信息
 	r.info = Server{
-		Name:    conf.Register.Name,
-		Addr:    conf.Register.Addr,
+		Name:    config.LocalConf.AppName,
+		Addr:    config.Conf.ServerRpc.Host + ":" + u_conv.Uint64ToString(config.Conf.ServerRpc.Port),
 		Weight:  conf.Register.Weight,
 		Version: conf.Register.Version,
 		Ttl:     conf.Register.Ttl,
@@ -135,13 +136,14 @@ func (r *Register) watcher() {
 				r.etcdCli.Close()
 			}
 			logs.Info("unregister etcd...")
-		case <-r.keepAliveCh:
-			//logs.Info("续约成功,%v", res)
-			//if res != nil {
-			//	if err := r.register(); err != nil {
-			//		logs.Error("keepAliveCh register failed,err:%v", err)
-			//	}
-			//}
+		case res := <-r.keepAliveCh:
+			//如果etcd重启了 相当于连接断开 需要进行重新连接 res==nil
+			if res == nil {
+				if err := r.register(); err != nil {
+					logs.Error("keepAliveCh register failed,err:%v", err)
+				}
+				logs.Info("续约重新注册成功,%v", res)
+			}
 		case <-ticker.C:
 			if r.keepAliveCh == nil {
 				if err := r.register(); err != nil {

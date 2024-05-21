@@ -1,0 +1,21 @@
+serverRpc:
+  host: 0.0.0.0
+  port: 11500
+serverMetrics:
+  host: 0.0.0.0
+  port: 5854
+log:
+  level: DEBUG
+kind: nacos
+nacos:
+  weight: 10
+etcd:
+  addrs:
+    - 127.0.0.1:2379
+  register:
+    version:
+    weight: 10
+    ttl: 10
+jwt:
+  secret: 123456
+  exp: 7

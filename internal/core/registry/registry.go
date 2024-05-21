@@ -8,7 +8,7 @@ type InstanceInfo struct {
 }
 
 type Registry interface {
-	Register(serviceName string) error
-	Deregister(serviceName string) error
-	Discover(serviceName string) ([]InstanceInfo, error)
+	Register() error
+	Deregister() error
+	Discover() ([]InstanceInfo, error)
 }

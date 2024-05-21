@@ -1,0 +1,25 @@
+serverHttp:
+  host: 0.0.0.0
+  port: 13000
+serverMetrics:
+  host: 0.0.0.0
+  port: 5855
+log:
+  level: DEBUG
+jwt:
+  secret: 123456
+  exp: 7
+domain:
+  user:
+    name: user
+    loadBalance: true
+etcd:
+  addrs:
+    - 127.0.0.1:2379
+  rwTimeout: 3
+  dialTimeout: 3
+services:
+  connector:
+    id: connector-1
+    clientHost: 127.0.0.1
+    clientPort: 12000

@@ -22,7 +22,7 @@ func RunV1(ctx context.Context) error {
 		//gin 启动  注册一个路由
 		r := router.RegisterRouter()
 		//http接口
-		if err := r.Run(fmt.Sprintf(":%d", config.Conf.HttpPort)); err != nil {
+		if err := r.Run(fmt.Sprintf(":%d", config.Conf.ServerHttp.Port)); err != nil {
 			logs.Fatal("gate gin run err:%v", err)
 		}
 	}()
@@ -65,7 +65,7 @@ func RunV2(ctx context.Context) error {
 		//gin 启动  注册一个路由
 		r := router.RegisterRouter()
 		//http接口
-		if err := r.Run(fmt.Sprintf(":%d", config.Conf.HttpPort)); err != nil {
+		if err := r.Run(fmt.Sprintf(":%d", config.Conf.ServerHttp.Port)); err != nil {
 			logs.Fatal("gate gin run err:%v", err)
 		}
 	}()
