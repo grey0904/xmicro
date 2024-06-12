@@ -8,7 +8,6 @@ import (
 	"time"
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/logs"
-	"xmicro/internal/core/registry"
 	"xmicro/internal/utils/u_conv"
 	// "go.etcd.io/etcd/client/v3" // 假设你在使用Etcd的Go客户端
 )
@@ -24,9 +23,9 @@ type Registry struct {
 }
 
 var once sync.Once
-var reg registry.Registry
+var reg *Registry
 
-func NewEtcdRegistry() registry.Registry {
+func NewEtcdRegistry() *Registry {
 	once.Do(func() {
 		client, err := clientv3.New(clientv3.Config{
 			Endpoints:   config.Conf.Etcd.Addrs,
@@ -141,7 +140,7 @@ func (r *Registry) Deregister() error {
 	return nil
 }
 
-func (r *Registry) Discover() ([]registry.InstanceInfo, error) {
-	// Nacos服务发现逻辑
-	return nil, nil
-}
+//func (r *Registry) Discover() ([]registry.InstanceInfo, error) {
+//	// Nacos服务发现逻辑
+//	return nil, nil
+//}

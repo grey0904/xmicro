@@ -13,7 +13,7 @@ import (
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/logs"
 	"xmicro/internal/common/registry"
-	"xmicro/internal/core/registry/nacos"
+	myRegistry "xmicro/internal/core/registry"
 	"xmicro/internal/core/repo"
 	"xmicro/internal/utils/u_conv"
 )
@@ -26,8 +26,12 @@ func RunV1(ctx context.Context) error {
 	manager := repo.New()
 
 	// 注册服务
-	reg := nacos.GetInstance() // nacos改为etcd即可切换
-	if err := reg.Register(); err != nil {
+	reg, err := myRegistry.InitRegistry() // nacos改为etcd即可切换
+	if err != nil {
+		return err
+	}
+
+	if err = reg.Register(); err != nil {
 		return err
 	}
 

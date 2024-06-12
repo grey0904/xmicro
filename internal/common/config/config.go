@@ -20,9 +20,10 @@ var Conf *Config
 var Nc config_client.IConfigClient
 
 const (
-	MysqlConfigKey = "mysql.yaml"
-	RedisConfigKey = "redis.yaml"
-	MongoConfigKey = "mongo.yaml"
+	MysqlConfigKey    = "mysql.yaml"
+	RedisConfigKey    = "redis.yaml"
+	MongoConfigKey    = "mongo.yaml"
+	RegistryConfigKey = "registry.yaml"
 )
 
 // InitConfig 加载配置
@@ -58,8 +59,11 @@ func InitConfig(appName string) {
 	// 用 AppConfig 中的Nacos配置信息创建“配置中心客户端”
 	newConfigClient()
 	// 从Nacos上获取配置，并解析给对应的结构体
-	initAppConfig()
-	initDatabaseConfigs()
+	initConfig(LocalConf.AppName+".yaml", &Conf)
+	initConfig(RegistryConfigKey, &Conf.Registry)
+	initConfig(MysqlConfigKey, &Conf.Database.MysqlConf)
+	initConfig(RedisConfigKey, &Conf.Database.RedisConf)
+	initConfig(MongoConfigKey, &Conf.Database.MongoConf)
 }
 
 func newConfigClient() {
@@ -105,26 +109,6 @@ func newConfigClient() {
 	}
 
 	Nc = client
-}
-
-func initAppConfig() {
-	content, err := Nc.GetConfig(vo.ConfigParam{
-		DataId: LocalConf.AppName + ".yaml",
-	})
-	if err != nil {
-		log.Fatalf("InitAppConfig NacosClient.GetConfig err: %v", err)
-	}
-
-	err = yaml.Unmarshal([]byte(content), &Conf)
-	if err != nil {
-		log.Fatalf("InitAppConfig yaml.Unmarshal err: %v", err)
-	}
-}
-
-func initDatabaseConfigs() {
-	initConfig(MysqlConfigKey, &Conf.Database.MysqlConf)
-	initConfig(RedisConfigKey, &Conf.Database.RedisConf)
-	initConfig(MongoConfigKey, &Conf.Database.MongoConf)
 }
 
 func initConfig(configKey string, target interface{}) {

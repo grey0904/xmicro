@@ -30,8 +30,21 @@ type Config struct {
 	Nacos         NacosConf               `yaml:"nacos"`
 	Etcd          EtcdConf                `yaml:"etcd"`
 	Jwt           JwtConf                 `yaml:"jwt"`
+	Registry      Registry                `yaml:"registry"`
 	Domain        map[string]Domain       `yaml:"domain"`
 	Services      map[string]ServicesConf `yaml:"services"`
+}
+
+type Registry struct {
+	Kind          string         `yaml:"kind"`
+	ConfigKey     string         `yaml:"configKey"`
+	DeplaySeconds int64          `yaml:"deplaySeconds"`
+	ServerConfig  []ServerConfig `yaml:"serverConfig"`
+}
+
+type ServerConfig struct {
+	Name      string `yaml:"name"`
+	ConfigKey string `yaml:"configKey"`
 }
 
 type ServerHttpConf struct {

@@ -14,6 +14,7 @@ import (
 type UserService struct {
 	userDao  *dao.UserDao
 	redisDao *dao.RedisDao
+	pb.UnimplementedUserServiceServer
 }
 
 func NewAccountService(manager *repo.Manager) *UserService {

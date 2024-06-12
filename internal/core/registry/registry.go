@@ -17,20 +17,20 @@ type InstanceInfo struct {
 type Registry interface {
 	Register() error
 	Deregister() error
-	Discover() ([]InstanceInfo, error)
+	//Discover() ([]InstanceInfo, error)
 }
 
 // InitRegistry 根据配置文件初始化服务注册实现
-func InitRegistry(conf config.RegistryConfig) (Registry, error) {
+func InitRegistry() (Registry, error) {
 	var reg Registry
-	config.Conf.Services
-	switch conf.Type {
+	kind := config.Conf.Registry.Kind
+	switch kind {
 	case "nacos":
-		reg = nacos.NewNacosRegistry(conf.Nacos)
+		reg = nacos.NewNacosRegistry()
 	case "etcd":
-		reg = etcd.NewEtcdRegistry(conf.Etcd)
+		reg = etcd.NewEtcdRegistry()
 	default:
-		return nil, fmt.Errorf("unknown registry type: %s", conf.Type)
+		return nil, fmt.Errorf("unknown registry kind: %s", kind)
 	}
 	return reg, nil
 }
