@@ -12,7 +12,6 @@ require (
 	github.com/nacos-group/nacos-sdk-go/v2 v2.2.4
 	github.com/redis/go-redis/v9 v9.3.0
 	github.com/spf13/viper v1.18.2
-	gitlab.casinovip.tech/minigame_backend/om_struct v0.0.0-20240517055934-17a98b515dcb
 	go.etcd.io/etcd/client/v3 v3.5.10
 	go.mongodb.org/mongo-driver v1.15.0
 	go.opentelemetry.io/otel/trace v1.19.0

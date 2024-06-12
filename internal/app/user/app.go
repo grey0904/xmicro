@@ -13,12 +13,12 @@ import (
 	"xmicro/internal/common/config"
 	"xmicro/internal/common/logs"
 	"xmicro/internal/common/registry"
-	"xmicro/internal/core/registry/etcd"
+	"xmicro/internal/core/registry/nacos"
 	"xmicro/internal/core/repo"
 	"xmicro/internal/utils/u_conv"
 )
 
-// RunV1 启动程序 启动grpc服务 启用http服务  启用日志 启用数据库
+// RunV1 Nacos版：启动程序 启动grpc服务 启用http服务  启用日志 启用数据库
 func RunV1(ctx context.Context) error {
 	logs.Init()
 
@@ -26,7 +26,7 @@ func RunV1(ctx context.Context) error {
 	manager := repo.New()
 
 	// 注册服务
-	reg := etcd.GetInstance()
+	reg := nacos.GetInstance() // nacos改为etcd即可切换
 	if err := reg.Register(); err != nil {
 		return err
 	}

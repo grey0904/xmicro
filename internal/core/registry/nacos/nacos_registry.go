@@ -8,7 +8,6 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/v2/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/v2/model"
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
-	"gitlab.casinovip.tech/minigame_backend/om_struct/im_proto/im"
 	"google.golang.org/grpc"
 	"log"
 	"strconv"
@@ -23,7 +22,7 @@ import (
 var once sync.Once
 var reg registry.Registry
 
-func GetInstance() registry.Registry {
+func NewNacosRegistry() registry.Registry {
 	once.Do(func() {
 		client, err := newNamingClient()
 		if err != nil {

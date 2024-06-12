@@ -26,7 +26,7 @@ type Registry struct {
 var once sync.Once
 var reg registry.Registry
 
-func GetInstance() registry.Registry {
+func NewEtcdRegistry() registry.Registry {
 	once.Do(func() {
 		client, err := clientv3.New(clientv3.Config{
 			Endpoints:   config.Conf.Etcd.Addrs,

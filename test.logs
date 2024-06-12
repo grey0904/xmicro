@@ -1,9 +1,0 @@
-2024-06-12T10:49:28.245+0800	ERROR	logs/zap.go:72	createLease failed,err:context deadline exceeded	{"app": "user"}
-2024-06-12T10:50:38.317+0800	INFO	logs/zap.go:68	register service success,key=/user/0.0.0.0:11500	{"app": "user"}
-2024-06-12T11:44:32.504+0800	INFO	logs/zap.go:68	unregister etcd...	{"app": "user"}
-2024-06-12T11:44:35.086+0800	ERROR	logs/zap.go:72	createLease failed,err:rpc error: code = Canceled desc = grpc: the client connection is closing	{"app": "user"}
-2024-06-12T11:44:35.086+0800	ERROR	logs/zap.go:72	keepAliveCh register failed,err:rpc error: code = Canceled desc = grpc: the client connection is closing	{"app": "user"}
-2024-06-12T11:44:35.092+0800	INFO	logs/zap.go:68	续约重新注册成功,<nil>	{"app": "user"}
-2024-06-12T11:44:35.507+0800	INFO	logs/zap.go:68	stop app finish	{"app": "user"}
-2024-06-12T11:44:35.507+0800	INFO	logs/zap.go:68	user app quit	{"app": "user"}
-2024-06-12T11:48:30.133+0800	INFO	logs/zap.go:68	register service success,key=/user/0.0.0.0:11500	{"app": "user"}
