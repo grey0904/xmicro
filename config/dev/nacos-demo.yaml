@@ -3,7 +3,7 @@ nacos:
   username: nacos
   password: nacos
   timeoutMs: 5000
-  namespaceId: 0f9a9129-7fcb-40f4-9138-5d3720c5bd4a
+  namespaceId: 2b829729-c3c4-4de7-aaed-8d6298222378
   cacheDir: cache_nacos/
   logDir: /tmp/nacos/logs
   logLevel: debug

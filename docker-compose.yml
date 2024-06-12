@@ -47,6 +47,17 @@ services:
       - ${MYSQL_PORT}:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
+  nacos:
+    image: nacos/nacos-server:v2.3.2-slim
+    container_name: nacos
+    restart: always
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
 networks:
   nats:
     name: nats

@@ -1,0 +1,5 @@
+kind: nacos
+configKey: nacos
+deplaySeconds: 50
+serverConfig:
+  - {name: user, configKey: grpc.user.yaml}
