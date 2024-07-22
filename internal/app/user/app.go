@@ -26,7 +26,7 @@ func RunV1(ctx context.Context) error {
 	manager := repo.New()
 
 	// 注册服务
-	reg, err := myRegistry.InitRegistry() // nacos改为etcd即可切换
+	reg, err := myRegistry.InitRegistry()
 	if err != nil {
 		return err
 	}

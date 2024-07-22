@@ -43,6 +43,7 @@ func (r *Registry) Register() error {
 		Weight:      config.Conf.Nacos.Weight,
 		Enable:      true,
 		Healthy:     true,
+		//Ephemeral:   true, // 是否是临时实例，true为是
 	}
 	success, err := r.cli.RegisterInstance(instance)
 	if err != nil {
