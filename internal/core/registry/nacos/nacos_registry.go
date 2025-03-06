@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 	"xmicro/internal/common/logs"
 )
 

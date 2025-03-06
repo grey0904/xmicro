@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"xmicro/internal/app/gate/api"
 	"xmicro/internal/app/gate/auth"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 	"xmicro/internal/common/rpc/discovery"
 )
 

@@ -2,7 +2,7 @@ package registry
 
 import (
 	"fmt"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 	"xmicro/internal/core/registry/etcd"
 	"xmicro/internal/core/registry/nacos"
 )

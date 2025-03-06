@@ -8,7 +8,7 @@ import (
 	"io"
 	"os"
 	"sync"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 )
 
 var (

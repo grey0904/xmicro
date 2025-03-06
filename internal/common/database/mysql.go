@@ -6,7 +6,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"time"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 	"xmicro/internal/common/logs"
 )
 

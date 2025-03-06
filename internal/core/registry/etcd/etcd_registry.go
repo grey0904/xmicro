@@ -6,7 +6,7 @@ import (
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"sync"
 	"time"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 	"xmicro/internal/common/logs"
 	"xmicro/internal/utils/u_conv"
 	// "go.etcd.io/etcd/client/v3" // 假设你在使用Etcd的Go客户端

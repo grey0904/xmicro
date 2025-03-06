@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"time"
-	"xmicro/internal/common/config"
+	config2 "xmicro/internal/common/config/center"
 	"xmicro/internal/common/logs"
 	"xmicro/internal/utils/u_conv"
 )
@@ -33,11 +33,11 @@ func NewRegister() *Register {
 func (r *Register) Close() {
 	r.closeCh <- struct{}{}
 }
-func (r *Register) Register(conf config.EtcdConf) error {
+func (r *Register) Register(conf config2.EtcdConf) error {
 	//注册信息
 	r.info = Server{
-		Name:    config.LocalConf.AppName,
-		Addr:    config.Conf.ServerRpc.Host + ":" + u_conv.Uint64ToString(config.Conf.ServerRpc.Port),
+		Name:    config2.LocalConf.AppName,
+		Addr:    config2.Conf.ServerRpc.Host + ":" + u_conv.Uint64ToString(config2.Conf.ServerRpc.Port),
 		Weight:  conf.Register.Weight,
 		Version: conf.Register.Version,
 		Ttl:     conf.Register.Ttl,

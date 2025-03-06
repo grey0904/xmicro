@@ -8,7 +8,7 @@ import (
 	"syscall"
 	"time"
 	"xmicro/internal/app/gate/router"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 	"xmicro/internal/common/logs"
 )
 

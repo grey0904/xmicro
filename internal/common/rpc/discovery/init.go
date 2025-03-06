@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/resolver"
 	"xmicro/internal/app/user/pb"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 	"xmicro/internal/common/logs"
 	"xmicro/internal/core/registry/etcd"
 )

@@ -1,23 +1,38 @@
-package config
+package center
 
-import "go.uber.org/zap/zapcore"
+import (
+	"time"
 
-// LocalConfig 本地的 nacos 配置
+	"go.uber.org/zap/zapcore"
+)
+
+// LocalConfig 本地配置（用于初始化配置中心客户端）
 type LocalConfig struct {
-	Nacos   Nacos  `yaml:"nacos"`   // nacos服务端配置，配置文件在config下面
-	AppName string `yaml:"appName"` // 应用名称
+	Type    string            `yaml:"type" validate:"required,oneof=nacos etcd"` // 配置中心类型
+	Nacos   NacosClientConfig `yaml:"nacos,omitempty"`                           // Nacos 客户端配置
+	Etcd    EtcdClientConfig  `yaml:"etcd,omitempty"`                            // ETCD 客户端配置
+	AppName string            `yaml:"appName" validate:"required"`               // 应用名称
 }
 
-type Nacos struct {
-	Endpoints           []string `yaml:"endpoints"`
-	Username            string   `yaml:"username"`
-	Password            string   `yaml:"password"`
-	TimeoutMs           uint64   `yaml:"timeoutMs"`
-	NamespaceId         string   `yaml:"namespaceId"`
-	NotLoadCacheAtStart bool     `yaml:"otLoadCacheAtStart"`
-	CacheDir            string   `yaml:"cacheDir"`
-	LogDir              string   `yaml:"logDir"`
-	LogLevel            string   `yaml:"logLevel"`
+// NacosClientConfig Nacos 客户端配置
+type NacosClientConfig struct {
+	Endpoints           []string `yaml:"endpoints"`           // Nacos 服务端地址列表
+	Username            string   `yaml:"username"`            // 用户名
+	Password            string   `yaml:"password"`            // 密码
+	TimeoutMs           uint64   `yaml:"timeoutMs"`           // 超时时间（毫秒）
+	NamespaceId         string   `yaml:"namespaceId"`         // 命名空间ID
+	NotLoadCacheAtStart bool     `yaml:"notLoadCacheAtStart"` // 启动时是否加载缓存
+	CacheDir            string   `yaml:"cacheDir"`            // 缓存目录
+	LogDir              string   `yaml:"logDir"`              // 日志目录
+	LogLevel            string   `yaml:"logLevel"`            // 日志级别
+}
+
+// EtcdClientConfig ETCD 客户端配置
+type EtcdClientConfig struct {
+	Endpoints   []string      `yaml:"endpoints" validate:"required,min=1"` // ETCD 节点地址
+	Username    string        `yaml:"username"`                            // 用户名
+	Password    string        `yaml:"password"`                            // 密码
+	DialTimeout time.Duration `yaml:"dialTimeout" validate:"required"`     // 连接超时时间
 }
 
 // Config 服务相关配置，配置存放在

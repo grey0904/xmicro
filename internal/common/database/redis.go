@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/redis/go-redis/v9"
 	"time"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 	"xmicro/internal/common/logs"
 )
 

@@ -6,12 +6,12 @@ import (
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"
 	"time"
-	"xmicro/internal/common/config"
+	config2 "xmicro/internal/common/config/center"
 	"xmicro/internal/common/logs"
 )
 
 type Resolver struct {
-	conf        config.EtcdConf
+	conf        config2.EtcdConf
 	etcdCli     *clientv3.Client //etcd连接
 	DialTimeout int              //超时时间
 	closeCh     chan struct{}
@@ -187,7 +187,7 @@ func Remove(list []resolver.Address, addr resolver.Address) ([]resolver.Address,
 
 func NewResolver() *Resolver {
 	return &Resolver{
-		conf:        config.Conf.Etcd,
-		DialTimeout: config.Conf.Etcd.DialTimeout,
+		conf:        config2.Conf.Etcd,
+		DialTimeout: config2.Conf.Etcd.DialTimeout,
 	}
 }

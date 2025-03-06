@@ -6,7 +6,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"time"
 	"xmicro/internal/app/user/pb"
-	"xmicro/internal/common/config"
+	"xmicro/internal/common/config/center"
 	"xmicro/internal/common/jwts"
 	"xmicro/internal/common/logs"
 	"xmicro/internal/common/result"

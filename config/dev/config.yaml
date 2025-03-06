@@ -1,0 +1,23 @@
+type: etcd  # 或者 nacos
+appName: user
+
+# 如果使用 etcd
+etcd:
+  endpoints:
+    - "localhost:2379"
+  username: ""
+  password: ""
+  dialTimeout: 5s
+
+# 如果使用 nacos
+nacos:
+  endpoints:
+    - "localhost:8848"
+  username: "nacos"
+  password: "nacos"
+  timeoutMs: 5000
+  namespaceId: "public"
+  notLoadCacheAtStart: true
+  cacheDir: "tmp/nacos/cache"
+  logDir: "tmp/nacos/log"
+  logLevel: "debug"
