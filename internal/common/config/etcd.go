@@ -1,4 +1,4 @@
-package center
+package config
 
 import (
 	"context"

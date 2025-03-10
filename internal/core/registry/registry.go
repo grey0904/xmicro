@@ -2,7 +2,7 @@ package registry
 
 import (
 	"fmt"
-	"xmicro/internal/common/config/center"
+	"xmicro/internal/common/config"
 	"xmicro/internal/core/registry/etcd"
 	"xmicro/internal/core/registry/nacos"
 )
@@ -23,7 +23,7 @@ type Registry interface {
 // InitRegistry 根据配置文件初始化服务注册实现
 func InitRegistry() (Registry, error) {
 	var reg Registry
-	kind := config.Conf.Registry.Kind
+	kind := config.LocalConf.Type
 	switch kind {
 	case "nacos":
 		reg = nacos.NewNacosRegistry()

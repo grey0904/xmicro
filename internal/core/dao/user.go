@@ -11,8 +11,7 @@ type UserDao struct {
 }
 
 func (d *UserDao) SaveAccount(ctx context.Context, ac *dto.Account) error {
-	table := d.repo.Mongo.Db.Collection("account")
-	_, err := table.InsertOne(ctx, ac)
+	var err error
 	if err != nil {
 		return err
 	}

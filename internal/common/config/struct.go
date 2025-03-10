@@ -1,4 +1,4 @@
-package center
+package config
 
 import (
 	"time"
@@ -116,7 +116,6 @@ type RegisterServer struct {
 type Database struct {
 	MysqlConf MysqlConf `yaml:"mysql"`
 	RedisConf RedisConf `yaml:"redis"`
-	MongoConf MongoConf `yaml:"mongo"`
 }
 
 type MysqlConf struct {

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"time"
-	"xmicro/internal/common/config/center"
+	"xmicro/internal/common/config"
 	"xmicro/internal/common/logs"
 )
 
@@ -32,7 +32,7 @@ func NewMysql() *MysqlManager {
 	// 检查连接
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	if err := db.PingContext(ctx); err != nil {
+	if err = db.PingContext(ctx); err != nil {
 		logs.Fatal("Error pinging MySQL server: %v\n", err)
 		return nil
 	}

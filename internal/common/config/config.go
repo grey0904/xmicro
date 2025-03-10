@@ -1,9 +1,10 @@
-package center
+package config
 
 import (
 	"fmt"
-	"gopkg.in/yaml.v3"
 	"os"
+
+	"gopkg.in/yaml.v3"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"
@@ -16,8 +17,8 @@ var (
 )
 
 // InitConfig 加载配置
-func InitConfig(configFile string) error {
-	if err := loadLocalConfig(configFile); err != nil {
+func InitConfig(appName string, configPath string) error {
+	if err := loadLocalConfig(configPath); err != nil {
 		return err
 	}
 
@@ -31,17 +32,17 @@ func InitConfig(configFile string) error {
 }
 
 // loadLocalConfig 加载本地配置文件
-func loadLocalConfig(configFile string) error {
-	if configFile == "" {
+func loadLocalConfig(configPath string) error {
+	if configPath == "" {
 		return fmt.Errorf("config file path is required")
 	}
 
-	if _, err := os.Stat(configFile); os.IsNotExist(err) {
-		return fmt.Errorf("config file not found: %s", configFile)
+	if _, err := os.Stat(configPath); os.IsNotExist(err) {
+		return fmt.Errorf("config file not found: %s", configPath)
 	}
 
 	v := viper.New()
-	v.SetConfigFile(configFile)
+	v.SetConfigFile(configPath)
 
 	if err := v.ReadInConfig(); err != nil {
 		return fmt.Errorf("read config file failed: %v", err)
@@ -74,6 +75,7 @@ func initConfigWithCenter(configCenter ConfigCenter) error {
 	if err != nil {
 		return fmt.Errorf("failed to get base config: %v", err)
 	}
+
 	if err := unmarshalConfig(content, &Conf); err != nil {
 		return err
 	}
@@ -82,15 +84,14 @@ func initConfigWithCenter(configCenter ConfigCenter) error {
 	configs := map[string]interface{}{
 		"mysql.yaml": &Conf.Database.MysqlConf,
 		"redis.yaml": &Conf.Database.RedisConf,
-		"mongo.yaml": &Conf.Database.MongoConf,
 	}
 
 	for key, target := range configs {
-		content, err := configCenter.GetConfig(key)
+		content, err = configCenter.GetConfig(key)
 		if err != nil {
 			return fmt.Errorf("failed to get %s config: %v", key, err)
 		}
-		if err := unmarshalConfig(content, target); err != nil {
+		if err = unmarshalConfig(content, target); err != nil {
 			return err
 		}
 	}

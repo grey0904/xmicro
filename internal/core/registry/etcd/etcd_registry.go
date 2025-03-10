@@ -3,12 +3,13 @@ package etcd
 import (
 	"context"
 	"encoding/json"
-	clientv3 "go.etcd.io/etcd/client/v3"
 	"sync"
 	"time"
-	"xmicro/internal/common/config/center"
+	"xmicro/internal/common/config"
 	"xmicro/internal/common/logs"
 	"xmicro/internal/utils/u_conv"
+
+	clientv3 "go.etcd.io/etcd/client/v3"
 	// "go.etcd.io/etcd/client/v3" // 假设你在使用Etcd的Go客户端
 )
 
@@ -22,8 +23,10 @@ type Registry struct {
 	closeCh     chan struct{}
 }
 
-var once sync.Once
-var reg *Registry
+var (
+	once sync.Once
+	reg  *Registry
+)
 
 func NewEtcdRegistry() *Registry {
 	once.Do(func() {
@@ -38,18 +41,21 @@ func NewEtcdRegistry() *Registry {
 		reg = &Registry{
 			cli:         client,
 			DialTimeout: 3,
+			closeCh:     make(chan struct{}),
 		}
 	})
 	return reg
 }
 
 func (r *Registry) Register() error {
+	appName := config.LocalConf.AppName
+	conf := config.Conf
 	r.info = Server{
-		Name:    config.LocalConf.AppName,
-		Addr:    config.Conf.ServerRpc.Host + ":" + u_conv.Uint64ToString(config.Conf.ServerRpc.Port),
-		Weight:  config.Conf.Etcd.Register.Weight,
-		Version: config.Conf.Etcd.Register.Version,
-		Ttl:     config.Conf.Etcd.Register.Ttl,
+		Name:    appName,
+		Addr:    conf.ServerRpc.Host + ":" + u_conv.Uint64ToString(conf.ServerRpc.Port),
+		Weight:  conf.Etcd.Register.Weight,
+		Version: conf.Etcd.Register.Version,
+		Ttl:     conf.Etcd.Register.Ttl,
 	}
 
 	if err := r.register(); err != nil {
@@ -99,29 +105,36 @@ func (r *Registry) register() error {
 
 // watcher 续约 新注册 close 注销
 func (r *Registry) watcher() {
-	//租约到期了 是不是需要去检查是否自动注册
 	ticker := time.NewTicker(time.Duration(r.info.Ttl) * time.Second)
+	defer ticker.Stop()
+
 	for {
 		select {
 		case res := <-r.keepAliveCh:
-			//如果etcd重启了 相当于连接断开 需要进行重新连接 res==nil
 			if res == nil {
 				if err := r.register(); err != nil {
 					logs.Error("keepAliveCh register failed,err:%v", err)
+					time.Sleep(time.Second * 3)
 				}
-				logs.Info("续约重新注册成功,%v", res)
+				logs.Info("续约重新注册成功")
 			}
 		case <-ticker.C:
 			if r.keepAliveCh == nil {
 				if err := r.register(); err != nil {
 					logs.Error("ticker register failed,err:%v", err)
+					time.Sleep(time.Second * 3)
 				}
 			}
+		case <-r.closeCh:
+			logs.Info("watcher received close signal")
+			return
 		}
 	}
 }
 
 func (r *Registry) Deregister() error {
+	close(r.closeCh)
+
 	_, err := r.cli.Delete(context.Background(), r.info.BuildRegisterKey())
 	if err != nil {
 		logs.Error("close and unregister failed,err:%v", err)
