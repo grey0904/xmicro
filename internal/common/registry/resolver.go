@@ -183,9 +183,3 @@ func Remove(list []resolver.Address, addr resolver.Address) ([]resolver.Address,
 	}
 	return nil, false
 }
-func NewResolver(conf config.EtcdConf) *Resolver {
-	return &Resolver{
-		conf:        conf,
-		DialTimeout: conf.DialTimeout,
-	}
-}

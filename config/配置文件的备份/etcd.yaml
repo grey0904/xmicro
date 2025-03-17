@@ -1,10 +1,9 @@
-etcd:
-  addrs:
-    - "localhost:2379"    # etcd 服务器地址，可以配置多个
-    # - "localhost:2380"  # 如果有多个节点，可以继续添加
-  rwTimeout: 5           # 读写超时时间（秒）
-  dialTimeout: 5         # 连接超时时间（秒）
-  register:
-    version: "v1.0.0"    # 服务版本
-    weight: 10           # 服务权重
-    ttl: 10             # 租约时长（秒）
+addrs:
+  - "localhost:2379"    # etcd 服务器地址，可以配置多个
+  # - "localhost:2380"  # 如果有多个节点，可以继续添加
+rwTimeout: 5           # 读写超时时间（秒）
+dialTimeout: 5         # 连接超时时间（秒）
+register:
+  version: "v1.0.0"    # 服务版本
+  weight: 10           # 服务权重
+  ttl: 10             # 租约时长（秒）

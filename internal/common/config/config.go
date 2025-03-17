@@ -84,6 +84,7 @@ func initConfigWithCenter(configCenter ConfigCenter) error {
 	configs := map[string]interface{}{
 		"mysql.yaml": &Conf.Database.MysqlConf,
 		"redis.yaml": &Conf.Database.RedisConf,
+		"etcd.yaml":  &Conf.Etcd,
 	}
 
 	for key, target := range configs {

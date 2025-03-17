@@ -30,12 +30,19 @@ var (
 
 func NewEtcdRegistry() *Registry {
 	once.Do(func() {
+		logs.Info("Attempting to connect to etcd with endpoints: %v", config.Conf.Etcd.Addrs)
+		if len(config.Conf.Etcd.Addrs) == 0 {
+			logs.Error("No etcd endpoints configured")
+			return
+		}
+
 		client, err := clientv3.New(clientv3.Config{
 			Endpoints:   config.Conf.Etcd.Addrs,
 			DialTimeout: time.Duration(config.Conf.Etcd.DialTimeout) * time.Second,
 		})
 		if err != nil {
-			logs.Error("clientv3.New err:%v", err)
+			logs.Error("Failed to create etcd client. Error: %v, Endpoints: %v, DialTimeout: %v",
+				err, config.Conf.Etcd.Addrs, config.Conf.Etcd.DialTimeout)
 			return
 		}
 		reg = &Registry{
@@ -43,6 +50,7 @@ func NewEtcdRegistry() *Registry {
 			DialTimeout: 3,
 			closeCh:     make(chan struct{}),
 		}
+		logs.Info("Successfully connected to etcd")
 	})
 	return reg
 }

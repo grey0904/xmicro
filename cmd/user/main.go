@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
-	"github.com/spf13/pflag"
-	"github.com/spf13/viper"
 	"log"
 	"os"
 	"xmicro/internal/app/user"
 	"xmicro/internal/common/config"
+
+	"github.com/spf13/pflag"
+	"github.com/spf13/viper"
 )
 
 func main() {

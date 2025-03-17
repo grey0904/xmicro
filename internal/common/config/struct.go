@@ -51,10 +51,8 @@ type Config struct {
 }
 
 type Registry struct {
-	Kind          string         `yaml:"kind"`
-	ConfigKey     string         `yaml:"configKey"`
-	DeplaySeconds int64          `yaml:"deplaySeconds"`
-	ServerConfig  []ServerConfig `yaml:"serverConfig"`
+	Type   string `yaml:"type" validate:"oneof=etcd nacos"`
+	Enable bool   `yaml:"enable"`
 }
 
 type ServerConfig struct {

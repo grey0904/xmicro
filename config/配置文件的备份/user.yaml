@@ -9,3 +9,6 @@ log:
 jwt:
   secret: 123456
   exp: 7
+registry:
+  type: "etcd"  # 可选: etcd, nacos
+  enable: true   # 是否启用服务注册
